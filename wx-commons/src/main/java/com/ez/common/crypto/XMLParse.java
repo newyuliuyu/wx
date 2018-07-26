@@ -8,7 +8,7 @@
 
 package com.ez.common.crypto;
 
-import com.easytnt.wechat.exception.AesException;
+import com.ez.common.wx.exception.AesException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

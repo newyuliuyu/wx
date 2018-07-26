@@ -1,6 +1,6 @@
 package com.ez.common.wx.xml;
 
-import com.easytnt.wechat.bean.*;
+import com.ez.common.wx.bean.*;
 import com.google.common.collect.Maps;
 import com.thoughtworks.xstream.XStream;
 

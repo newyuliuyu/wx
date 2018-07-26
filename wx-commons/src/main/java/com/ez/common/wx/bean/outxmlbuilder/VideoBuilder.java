@@ -1,7 +1,7 @@
 package com.ez.common.wx.bean.outxmlbuilder;
 
 
-import com.easytnt.wechat.bean.WxXmlOutVideoMessage;
+import com.ez.common.wx.bean.WxXmlOutVideoMessage;
 
 /**
  * 视频消息builder

@@ -1,6 +1,7 @@
 package com.ez.common.wx.bean;
 
-import com.easytnt.wechat.utils.Json2;
+
+import com.ez.common.json.Json2;
 
 /**
  * 微信AccessToken，微信API接口调用凭证

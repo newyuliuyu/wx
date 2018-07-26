@@ -1,6 +1,6 @@
 package com.ez.common.wx.bean;
 
-import com.easytnt.wechat.utils.xml.XStreamMediaIdConverter;
+import com.ez.common.wx.xml.XStreamMediaIdConverter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 

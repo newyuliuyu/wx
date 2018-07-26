@@ -1,10 +1,10 @@
 package com.ez.common.wx.bean;
 
-import com.easytnt.wechat.exception.AesException;
-import com.easytnt.wechat.utils.WxConfig;
-import com.easytnt.wechat.utils.crypto.WXBizMsgCrypt;
-import com.easytnt.wechat.utils.xml.XStreamCDataConverter;
-import com.easytnt.wechat.utils.xml.XStreamTransformer;
+import com.ez.common.crypto.WXBizMsgCrypt;
+import com.ez.common.wx.WxConfig;
+import com.ez.common.wx.exception.AesException;
+import com.ez.common.wx.xml.XStreamCDataConverter;
+import com.ez.common.wx.xml.XStreamTransformer;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import org.apache.commons.io.IOUtils;

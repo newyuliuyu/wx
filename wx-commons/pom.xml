@@ -90,6 +90,14 @@
             <version>3.4.6</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- XML -->
+        <!-- http://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.7</version>
+        </dependency>
     </dependencies>
 
     <build>

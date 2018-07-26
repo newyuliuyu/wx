@@ -1,7 +1,7 @@
 package com.ez.common.wx.bean.outxmlbuilder;
 
 
-import com.easytnt.wechat.bean.WxXmlOutImageMessage;
+import com.ez.common.wx.bean.WxXmlOutImageMessage;
 
 /**
  * 图片消息builder

@@ -11,6 +11,7 @@
 
     <modules>
         <module>wx-commons</module>
+        <module>wx-web</module>
     </modules>
 
     <dependencies>
@@ -50,6 +51,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>

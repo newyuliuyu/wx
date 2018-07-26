@@ -1,7 +1,7 @@
 package com.ez.common.wx.bean.outxmlbuilder;
 
 
-import com.easytnt.wechat.bean.WxXmlOutVoiceMessage;
+import com.ez.common.wx.bean.WxXmlOutVoiceMessage;
 
 /**
  * 语音消息builder
