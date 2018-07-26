@@ -1,6 +1,7 @@
 package com.ez.common.httpclient;
 
-import com.easytnt.wechat.utils.Json2;
+
+import com.ez.common.json.Json2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.http.Consts;
