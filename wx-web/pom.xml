@@ -78,6 +78,10 @@
     </dependencyManagement>
 
     <build>
+        <finalName>easydata</finalName>
+        <filters>
+            <filter>envconf/${env}.properties</filter>
+        </filters>
         <resources>
             <resource>
                 <directory>src/main/java</directory>
@@ -93,6 +97,48 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <!-- 开发环境 -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault><!--默认启用的是dev环境配置 -->
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <exclude>ftl/</exclude>
+                            <exclude>template/</exclude>
+                            <exclude>static/</exclude>
+                        </excludes>
+                    </resource>
 
+                    <resource>
+                        <filtering>false</filtering>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>ftl/</include>
+                            <include>template/</include>
+                            <include>static/</include>
+                        </includes>
+                    </resource>
+                </resources>
+                <testResources>
+                    <testResource>
+                        <filtering>true</filtering>
+                        <directory>/src/test/resources</directory>
+                    </testResource>
+                </testResources>
+
+            </build>
+
+        </profile>
+    </profiles>
 
 </project>

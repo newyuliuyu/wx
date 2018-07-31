@@ -22,8 +22,8 @@ public class WxConfig {
     private String apiKey;
 
     //内存更新
-    private volatile String accessToken="7_KvzFUsO7d3qBE4nKYIqqET-LIyHMbx_tx_8vLeFacnvUHDTV8h_MHDz263muVvK0RWmyMcmAvvysXP1xMYdrp4E1gtpwgEvhhuU0qGJhNZ4ev_Mmg7XwA5a8iN6_ccdPyE7sLTOKDa8O9z52KNGhAAAYBU";
-    private volatile long expiresTime=1521449040729L;
+    private volatile String accessToken;
+    private volatile long expiresTime;
 
     public String getAppId() {
         return appId;
@@ -73,7 +73,7 @@ public class WxConfig {
         this.apiKey = apiKey;
     }
 
-    public static WxConfig getInstance(){
+    public static WxConfig getInstance() {
         WxConfig wxConfig = SpringContextUtil.getBean(WxConfig.class);
         return wxConfig;
     }
@@ -82,13 +82,16 @@ public class WxConfig {
     public void expireAccessToken() {
         this.expiresTime = 0;
     }
+
     public boolean isAccessTokenExpired() {
         return System.currentTimeMillis() > this.expiresTime;
     }
+
     public synchronized void updateAccessToken(String accessToken, int expiresInSeconds) {
         this.accessToken = accessToken;
         this.expiresTime = System.currentTimeMillis() + (expiresInSeconds - 200) * 1000l;
     }
+
     public String getAccessToken() {
         return accessToken;
     }

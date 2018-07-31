@@ -87,16 +87,27 @@ public class HttpPostBuilder {
     }
 
     public HttpPost buildJson() {
-        setJsonPost();
+        String json = toJsonData();
+        setJsonPost(json);
         return post;
     }
 
-    private void setJsonPost() {
+    public HttpPost buildJson(String jsonData) {
+        setJsonPost(jsonData);
+        return post;
+    }
+
+    private String toJsonData() {
         Map<String, String> data = Maps.newHashMap();
         for (NameValuePair nameValuePair : formData) {
             data.put(nameValuePair.getName(), nameValuePair.getValue());
         }
         String json = Json2.toJson(data);
+        return json;
+    }
+
+    private void setJsonPost(String json) {
+
         StringEntity entity = new StringEntity(json, "utf-8");// 解决中文乱码问题
         entity.setContentEncoding("UTF-8");
         entity.setContentType("application/json");

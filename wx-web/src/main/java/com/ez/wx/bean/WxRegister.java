@@ -4,6 +4,7 @@ import com.ez.common.wx.WxHelper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.function.Supplier;
@@ -39,7 +40,13 @@ public class WxRegister {
 
 
     public WxRegister validate() {
-        isOk = WxHelper.checkSignature(signature, timestamp, nonce);
+        if (StringUtils.isEmpty(signature)
+                || StringUtils.isEmpty(timestamp)
+                || StringUtils.isEmpty(nonce)) {
+            isOk = false;
+        } else {
+            isOk = WxHelper.checkSignature(signature, timestamp, nonce);
+        }
         return this;
     }
 

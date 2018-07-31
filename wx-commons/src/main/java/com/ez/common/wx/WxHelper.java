@@ -1,6 +1,7 @@
 package com.ez.common.wx;
 
 import com.ez.common.crypto.SHA2;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 
@@ -18,6 +19,9 @@ public class WxHelper {
 
     public static boolean checkSignature(String signature, String timestamp, String nonce) {
         String token = WxConfig.getInstance().getToken();
+        if (StringUtils.isEmpty(token)) {
+            return false;
+        }
         String[] arr = new String[]{token, timestamp, nonce};
         Arrays.sort(arr);
         StringBuffer content = new StringBuffer();
