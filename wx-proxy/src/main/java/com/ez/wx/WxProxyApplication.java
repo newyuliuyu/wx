@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, MybatisAutoConfiguration.class})
-public class WxApplication {
+public class WxProxyApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(WxApplication.class, args);
+        SpringApplication.run(WxProxyApplication.class, args);
     }
 }
