@@ -1,0 +1,64 @@
+html{
+	font-size: 16px;
+}
+body{
+	background:none;
+}
+header{
+	background:none;
+	padding-bottom: 0px;
+	box-shadow: none;
+}
+.no-display{
+	display: none;
+}
+@media(min-width: 768px){
+	.show-display{
+		display: block;
+	}
+}
+
+/*主菜单颜色*/
+.user-info{
+	margin-bottom: 0px;
+	cursor: pointer;
+}
+.user-info .user-image{
+	/*display: inline-block;*/
+	/*line-height: 20px;*/
+	border-radius: 50%;
+	width: 34px;
+	height: 34px;
+	background: #fff;
+	margin-right: 10px;
+	overflow: hidden;
+	display: inline-block;
+	line-height: 34px;
+	vertical-align: middle;
+	text-align: center;
+
+}
+.user-info .user-image img{
+	width: 100%;
+	height: 100%;
+}
+.user-info .user-name{
+	display: inline-block;
+	line-height: 34px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.main-menu-warp{
+
+}
+.main-menu-warp .main-menu{
+	padding: 0px 12px;
+	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+	font-size: 1.2rem;
+	color: #343a40!important;
+	cursor: pointer;
+}
+.main-menu-warp  .text-no-line{
+	text-decoration: none;
+}
