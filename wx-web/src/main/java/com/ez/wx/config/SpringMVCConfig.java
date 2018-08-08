@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -87,6 +88,17 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
         //TODO添加自定义的拦截器
         super.addInterceptors(registry);
     }
+    @Override
+    protected void addCorsMappings(CorsRegistry registry) {
+        super.addCorsMappings(registry);
+
+//        registry.addMapping("/**")
+//                .allowedOrigins("http://localhost:9000", "null")
+//                .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
+//                .maxAge(3600)
+//                .allowCredentials(true);
+    }
+
 
     @Bean(name = "viewResolver")
     @Primary

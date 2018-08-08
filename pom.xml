@@ -12,6 +12,7 @@
     <modules>
         <module>wx-commons</module>
         <module>wx-web</module>
+        <module>wx-sendcjnotice</module>
     </modules>
 
     <dependencies>
