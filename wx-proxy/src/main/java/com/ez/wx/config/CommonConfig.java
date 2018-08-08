@@ -17,6 +17,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommonConfig {
 
+
+
     @Bean
     public SpringContextUtil springContextUtil() {
         return new SpringContextUtil();
