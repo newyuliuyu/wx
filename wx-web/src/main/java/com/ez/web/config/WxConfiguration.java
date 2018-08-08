@@ -1,4 +1,4 @@
-package com.easytnt.wx.config;
+package com.ez.web.config;
 
 import com.ez.common.wx.WxConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
