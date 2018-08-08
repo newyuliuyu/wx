@@ -11,8 +11,9 @@
 
     <modules>
         <module>wx-commons</module>
-        <module>wx-web</module>
+        <module>wx-proxy</module>
         <module>wx-sendcjnotice</module>
+        <module>wx-business</module>
     </modules>
 
     <dependencies>

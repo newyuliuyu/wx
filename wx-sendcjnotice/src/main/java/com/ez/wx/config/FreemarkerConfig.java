@@ -1,4 +1,4 @@
-package com.easytnt.wx.config;
+package com.ez.wx.config;
 
 import com.ez.common.freemarker.FreemarkerStaticModels;
 import com.google.common.collect.Maps;

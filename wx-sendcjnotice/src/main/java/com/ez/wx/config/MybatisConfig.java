@@ -1,4 +1,4 @@
-package com.easytnt.wx.config;
+package com.ez.wx.config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;

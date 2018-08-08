@@ -1,4 +1,4 @@
-package com.easytnt.wx.config;
+package com.ez.wx.config;
 
 import com.ez.common.db.DatasourceProperties;
 import com.ez.common.db.InitDataSource;

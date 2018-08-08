@@ -1,4 +1,4 @@
-package com.easytnt.wx.config;
+package com.ez.wx.config;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
