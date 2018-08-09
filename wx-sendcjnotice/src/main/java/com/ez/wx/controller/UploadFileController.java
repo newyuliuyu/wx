@@ -42,12 +42,9 @@ public class UploadFileController {
         log.debug("file upload");
         // String a = request.getParameter("a");
 
-        String dir = "";
-        Path path = Paths.get(dir);
-        File dirFile = path.toFile();
-        FileUtil.dirNotExistAndCreate(dirFile);
+//        Path dirPath = checkAndCreateUploadFileDir("");
 
-        IdGenerator idGenerator = SpringContextUtil.getBean("IdGenerator");
+        IdGenerator idGenerator = SpringContextUtil.getBean("idGenerator");
         List<Map<String, String>> filesMap = Lists.newArrayList();
         MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
         Iterator<String> iter = mRequest.getFileNames();
@@ -58,7 +55,7 @@ public class UploadFileController {
                 String originalFilename = oldFile.getOriginalFilename();
                 String suffix = FileUtil.fileSuffix(originalFilename);
                 String newFileName = idGenerator.nextId() + suffix;
-                File newFile = new File(dir, newFileName);
+//                File newFile = dirPath.resolve(newFileName).toFile();
 //                FileUtils.copyInputStreamToFile(oldFile.getInputStream(), newFile);
                 Map<String, String> fileMap = Maps.newHashMap();
                 fileMap.put("old", originalFilename);
@@ -67,5 +64,13 @@ public class UploadFileController {
             }
         }
         return ModelAndViewFactory.instance("/uploadData").with("files", filesMap).build();
+    }
+
+    private Path checkAndCreateUploadFileDir(String uploadFileDir) {
+        String dir = uploadFileDir;
+        Path path = Paths.get(dir);
+        File dirFile = path.toFile();
+        FileUtil.dirNotExistAndCreate(dirFile);
+        return path;
     }
 }

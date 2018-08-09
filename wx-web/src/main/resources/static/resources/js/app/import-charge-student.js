@@ -5,6 +5,7 @@
         'dot',
         'bootstrap',
         'ezconfig',
+        'js/commons/JQuery.download',
         'css!style/bootstrap/bootstrap.min',
         'css!style/public',
         'css!style/font-awesome'
@@ -139,11 +140,21 @@
             });
         }
 
+        function init() {
+            $('.downloadTemplate').click(function () {
+                var url = window.app.config.sendcj + "/download/studentInfoTemplate";
+                $.download(url);
+            });
+        }
+
         return {
             render: function () {
+                $('body').show();
                 initUI();
                 initNextStepEvent();
                 initUploadStudentBtn();
+                init();
+
             }
         }
     });

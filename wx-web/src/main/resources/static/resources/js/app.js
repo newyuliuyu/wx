@@ -82,6 +82,7 @@ var config = {
         'pin':'js/lib/jquery.pin',
         'dot': 'js/lib/doT2.0.0',
         'ezconfig': 'js/config/ezconfig',
+        'ajax': 'js/commons/ajax',
         'ckeditor':'js/lib/ckeditor/ckeditor'
     },
     map: {
