@@ -45,15 +45,97 @@
 <div class="ease_header pdlr20">
     <div class="container clearfix">
         <!-- <a href="#" class="fl easy_logo"></a> -->
-        <a href="${request.contextPath}" class="easy_logoImg"><img
-                src="/resources/images/logo.png" alt="logo"></a>
+        <a class="easy_logoImg"><img
+                src="/wxweb/resources/images/ez/logo.png" alt="logo"></a>
         <ul class="easy_nav fl">
-            <li><a class="" href="javascript:;"><span>学情监测</span></a></li>
+            <li><a class="" href="javascript:;"><span>【导入缴费学生信息】</span></a></li>
         </ul>
-</div>
+    </div>
 </div>
 
+
+<div class="wrapper">
+    <div class="tabStyle2" name="tab">
+
+        <div class="container">
+            <div class="breadcrumb breadStyle1 navigationBar" style="display: none;">
+                <p class="breadtxt">
+                </p>
+            </div>
+            <div class="tabContent2" name="tabCon">
+                <div class="clearfix">
+                    <div class="col-md-12">
+                        <!-- 步骤导航 -->
+                        <ul class="guide">
+                            <li class="li1 selected"><span>1</span><label>选择导入的文件</label></li>
+                            <li class="line">
+                                <hr>
+                            </li>
+                            <li class="li2"><span>2</span><label>导入文件</label></li>
+                        </ul>
+                        <!-- 步骤导航 -->
+                    </div>
+                    <div class="col-md-12">
+                        <div id="guideContent" class="guideContent">
+
+                            <!-- 第一步 -->
+                            <div class="guidePage">
+                                <div class="body">
+                                    <div class="col-md-12">
+                                        <span id="studentUpload" class="uploadBtn btn btn-primary btn-lg">
+                                            <label class="icon-cloud-upload">选择学生文件</label>
+                                        </span>
+                                        <span class="btn btn-outline-secondary icon-cloud-download"
+                                              style="display: inline-block;height: 50px;padding-top: 13px;">下载模板文件</span>
+                                    </div>
+                                    <div id="studentFiles" class="col-md-12" style="margin-top: 30px;"></div>
+                                </div>
+                                <div class="toolBar">
+                                    <a id="step1" href="javascript:void(0);"
+                                       class="btn btn-outline-primary fr nextStep" idx="1">下一步</a>
+                                </div>
+                            </div>
+                            <!-- 第一步 -->
+                            <!-- 第二步 -->
+                            <div class="guidePage">
+                                <div class="body">
+                                    <div style="padding-top: 10%; padding-left: 30%;">
+                                        <span id="okText" style="font-size: 50px; color: #2196F3;">请点击“保存&完成”</span>
+                                    </div>
+                                </div>
+                                <div class="toolBar">
+                                    <a href="javascript:void(0);" class="btn btn-outline-primary fr okButton">保存&完成</a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-primary fr prevStep"
+                                       style="margin-right: 10px;" idx="2">上一步</a>
+                                </div>
+                            </div>
+                            <!-- 第二步 -->
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
 
 </body>
 </html>
+<script id="studentT" type="text/x-dot-template">
+    <div   id="{{=it.file.id}}" class="studentFile" style="padding: 5px 5px;">
+	<span title="{{=it.file.name}}"  class="textTitle">
+		{{=it.file.name}}
+	</span>
+
+        <div class="progress progress2">
+            <div class="progress-bar progress-bar2 bar-unOver">
+                0%
+            </div>
+        </div>
+        <span class="removeFile  icon-remove"></span>
+    </div>
+</script>

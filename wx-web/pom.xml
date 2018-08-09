@@ -16,7 +16,6 @@
     <description>Demo project for Spring Boot</description>
 
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -112,7 +111,11 @@
                             <exclude>static/</exclude>
                         </excludes>
                     </resource>
-
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources/static/resources/js/config</directory>
+                        <targetPath>static/resources/js/config</targetPath>
+                    </resource>
                     <resource>
                         <filtering>false</filtering>
                         <directory>src/main/resources</directory>
@@ -122,6 +125,7 @@
                             <include>static/</include>
                         </includes>
                     </resource>
+
                 </resources>
                 <testResources>
                     <testResource>

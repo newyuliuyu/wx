@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -88,6 +89,7 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
         //TODO添加自定义的拦截器
         super.addInterceptors(registry);
     }
+
     @Override
     protected void addCorsMappings(CorsRegistry registry) {
         super.addCorsMappings(registry);
@@ -153,6 +155,12 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 
         SpringMVCExceptionResolver exceptionResolver = new SpringMVCExceptionResolver();
         return exceptionResolver;
+    }
+
+    @Bean
+    public CommonsMultipartResolver commonsMultipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        return resolver;
     }
 
 

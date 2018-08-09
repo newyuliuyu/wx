@@ -80,6 +80,8 @@ var config = {
         'utils': 'js/utils/utils',
         'vue': 'js/lib/vue',
         'pin':'js/lib/jquery.pin',
+        'dot': 'js/lib/doT2.0.0',
+        'ezconfig': 'js/config/ezconfig',
         'ckeditor':'js/lib/ckeditor/ckeditor'
     },
     map: {
