@@ -1,10 +1,13 @@
 package com.ez.wx.config;
 
+import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
 import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 import com.ez.common.mvc.SpringMVCExceptionResolver;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -32,12 +35,14 @@ import java.util.List;
  * @since JDK 1.7+
  */
 @Configuration
+@Slf4j
 public class SpringMVCConfig extends WebMvcConfigurationSupport {
 
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
+        log.debug("配置HttpMessageConverter");
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteDateUseDateFormat,
                 SerializerFeature.WriteMapNullValue,
@@ -92,6 +97,7 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addCorsMappings(CorsRegistry registry) {
+        //配置跨域请求
         super.addCorsMappings(registry);
 
 //        registry.addMapping("/**")
@@ -145,6 +151,12 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
                 SerializerFeature.WriteNullBooleanAsFalse,
                 SerializerFeature.WriteEnumUsingToString);
         fastJsonConfig.setDateFormat("yyyy-MM-dd");
+
+        SerializeConfig serializeConfig = fastJsonConfig.getSerializeConfig();
+
+        serializeConfig.put(Long.class, ToStringSerializer.instance);
+        serializeConfig.put(long.class, ToStringSerializer.instance);
+
         FastJsonJsonView view = new FastJsonJsonView();
         view.setFastJsonConfig(fastJsonConfig);
         return view;
@@ -152,7 +164,6 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 
     @Bean
     public SpringMVCExceptionResolver exceptionResolver() {
-
         SpringMVCExceptionResolver exceptionResolver = new SpringMVCExceptionResolver();
         return exceptionResolver;
     }

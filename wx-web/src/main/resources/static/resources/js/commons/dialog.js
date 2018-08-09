@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    define(['jquery', 'commons/drag'], function ($) {
+    define(['jquery', 'js/commons/drag'], function ($) {
             window.zindex = 9999; // 最高层级
             window.idialog = 0; // 记录有一个非模态框
 

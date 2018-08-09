@@ -1,5 +1,6 @@
-if(window.app){
-    window.app.config={
-        sendcj:'${send.cj.url}'
+if (window.app) {
+    window.app.config = {
+        sendcjURL: '${send.cj.url}',
+        wxProxyURL: '${wx.proxy.url}'
     }
 }

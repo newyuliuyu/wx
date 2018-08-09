@@ -21,10 +21,14 @@
 
         function init() {
             var $tbody = $('#server-status-tbody');
-            var url = window.app.config.sendcj;
+            var url = window.app.config.sendcjURL;
             var tr = '<tr><td>' + url + '</td><td>正在检查...</td></tr>';
             $tbody.append(tr);
             checkServer(url, 0);
+            url = window.app.config.wxProxyURL;
+            tr = '<tr><td>' + url + '</td><td>正在检查...</td></tr>';
+            $tbody.append(tr);
+            checkServer(url, 1);
         }
 
         return {

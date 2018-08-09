@@ -67,7 +67,7 @@
                     'url': url
                 });
             },
-            getHTML: function (url,timeout) {
+            getHTML: function (url, timeout) {
                 var param = {
                     'url': url,
                     'dataType': DataType.HTML
@@ -92,7 +92,31 @@
                     'data': dataset,
                     type: Method.POST
                 });
-            }
+            },
+            corsPostJson: function (url, dataset) {
+                return myAjax({
+                    'url': url,
+                    'data': dataset,
+                    crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    type: Method.POST
+                });
+            },
+            corsGetJson: function (url, timeout) {
+                var param = {
+                    'url': url,
+                    crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                };
+                if (timeout) {
+                    param.timeout = timeout;
+                }
+                return myAjax(param);
+            },
         }
         return o;
     });

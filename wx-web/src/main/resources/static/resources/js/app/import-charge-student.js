@@ -1,16 +1,19 @@
 (function () {
     "use strict";
-    var models = ['jquery',
+    var models = ['jquery', 'ajax', 'dialog',
         'webuploader',
         'dot',
         'bootstrap',
         'ezconfig',
         'js/commons/JQuery.download',
+        'js/commons/JQuery.progress',
         'css!style/bootstrap/bootstrap.min',
         'css!style/public',
-        'css!style/font-awesome'
+        'css!style/font-awesome',
+        'css!style/dialog'
     ];
-    define(models, function ($, WebUploader, dot) {
+    define(models, function ($, $ajax, dialog, WebUploader, dot) {
+        var sendcjURL = window.app.config.sendcjURL;
 
         $(window).resize(function () {          //当浏览器大小变化时
             // console.log($(window).height());          //浏览器时下窗口可视区域高度
@@ -66,12 +69,19 @@
         }
 
         function check(idx) {
+            if (idx === 1) {
+                var files = $('#studentFiles>div');
+                if (files.size() == 0) {
+                    dialog.alter("还没选择学生信息文件", "关闭");
+                    return false;
+                }
+            }
             return true;
         }
 
 
         function initUploadStudentBtn() {
-            var url = window.app.config.sendcj + "/upload";
+            var url = sendcjURL + "/upload";
             var flashURL = window.app.rootPath + 'Uploader.swf';
             var uploader = WebUploader.create({
                 // 选完文件后，是否自动上传。
@@ -136,14 +146,40 @@
             uploader.on('uploadComplete', function () {
                 var file = arguments[0];
                 $('#' + file.id + ' .progress-bar').css('width', '100%').text('100%').addClass('bar-over').removeClass('bar-unOver');
-                ;
             });
         }
 
         function init() {
             $('.downloadTemplate').click(function () {
-                var url = window.app.config.sendcj + "/download/studentInfoTemplate";
+                var url = sendcjURL + "/download/studentInfoTemplate";
                 $.download(url);
+            });
+
+            $('.okButton').click(function () {
+                var fileNames = [];
+                $('#studentFiles>div').each(function (idx, item) {
+                    var oldfile = $(item).attr('old');
+                    var newfile = $(item).attr('new');
+                    fileNames.push({oldfile: oldfile, newfile: newfile});
+                });
+                console.log(fileNames)
+                var url = sendcjURL + "/process";
+                $('#overShow').hide();
+                $('#progressDIV').show();
+                $ajax.corsPostJson(url, fileNames).then(function (dataset) {
+                    console.log('then', arguments)
+                    var onlyKey = dataset.onlyKey;
+                    $('#progressDIV').progress({
+                        url: sendcjURL + '/progress',
+                        onlyKey: onlyKey,
+                        cors: true,
+                        finishedCallBack: function () {
+                            console.log("运行完毕")
+                        }
+                    });
+                }).always(function () {
+                    console.log('always', arguments)
+                });
             });
         }
 
