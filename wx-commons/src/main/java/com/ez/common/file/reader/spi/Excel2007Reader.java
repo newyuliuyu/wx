@@ -22,6 +22,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,13 +38,13 @@ import java.util.List;
  */
 public class Excel2007Reader implements FileProcess {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private String filepath;
+    private Path filepath;
 
     private List<Excel2007Cell[]> dataset = Lists.newArrayList();
     private HeaderMetadata headerMetadata = new HeaderMetadata();
     private int curRowIdx = 0;
 
-    public Excel2007Reader(String filepath) {
+    public Excel2007Reader(Path filepath) {
         this.filepath = filepath;
         open();
     }
@@ -66,7 +67,7 @@ public class Excel2007Reader implements FileProcess {
     }
 
     private void readData() throws Exception {
-        OPCPackage pkg = OPCPackage.open(filepath);
+        OPCPackage pkg = OPCPackage.open(filepath.toFile());
         XSSFReader reader = new XSSFReader(pkg);
         SharedStringsTable sst = reader.getSharedStringsTable();
 

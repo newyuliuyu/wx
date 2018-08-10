@@ -1,5 +1,7 @@
 package com.ez.common.progress;
 
+import java.util.function.Supplier;
+
 /**
  * ClassName: ProgressEvent <br/>
  * Function: TODO ADD FUNCTION. <br/>
@@ -21,6 +23,10 @@ public class ProgressEvent {
     private int completeNum;
     private int percent;
 
+    public static ProgressEvent create(Supplier<ProgressEvent> supplier) {
+        return supplier.get();
+    }
+
     public ProgressEvent() {
 
     }
@@ -36,6 +42,19 @@ public class ProgressEvent {
         this.percent = percent.intValue();
         this.message = message;
         this.over = isOver;
+    }
+    public ProgressEvent message(int completeNum, int totalNum, String message) {
+       return message(completeNum, totalNum, message, false);
+    }
+
+    public ProgressEvent message(int completeNum, int totalNum, String message, boolean isOver) {
+        this.totalNum = totalNum;
+        this.completeNum = completeNum;
+        Double percent = completeNum * 1.0 / totalNum * 100;
+        this.percent = percent.intValue();
+        this.message = message;
+        this.over = isOver;
+        return this;
     }
 
     public int getTotalNum() {

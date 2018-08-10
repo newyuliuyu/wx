@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>日志</title>
+    <style>
+        .a {
+            margin-right: 20px;
+        }
+
+        @media ( min-width: 768px) {
+            .form-inline .form-control {
+                width: 150px;
+            }
+        }
+
+        form {
+            margin-top: 30px;
+        }
+
+        #myTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #myTable tr {
+            border: 1px solid;
+            height: 30px;
+        }
+
+        #myTable td {
+            border: 1px solid;
+            height: 30px;
+        }
+
+        #myTable th {
+            border: 1px solid;
+            height: 30px;
+        }
+
+    </style>
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var pathName = document.location.pathname;
+        var index = pathName.substr(1).indexOf("/");
+        var myContextPath = pathName.substr(0, index + 1);
+        window["app"] = {rootPath: myContextPath + '/', entry: 'cache'};
+
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        script.setAttribute("data-main", app.rootPath + "resources/js/app");
+        script.setAttribute("src", app.rootPath + "resources/js/lib/require.js");
+        var heads = document.getElementsByTagName("head");
+        document.documentElement.appendChild(script);
+    </script>
+</head>
+<body style="display: none">
+
+<table id="myTable" style="border: 1px rebeccapurple solid;" cellspacing="0">
+    <thead>
+    <tr>
+        <th>缓存KEY</th>
+        <th>删除</th>
+    </tr>
+    </thead>
+    <tbody class="content">
+    </tbody>
+</table>
+</body>
+</html>

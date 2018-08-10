@@ -37,4 +37,13 @@ public class FileAndPathTest {
         log.debug("path.relativize(a):{}", path.relativize(Paths.get("/home/liuyu")));
 
     }
+
+    @Test
+    public void createPath() throws Exception {
+
+        Path path = Paths.get("upload");
+        log.debug(path.toAbsolutePath().toString());
+//        path.toFile().mkdirs();
+
+    }
 }

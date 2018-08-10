@@ -1,12 +1,15 @@
 package com.ez.wx.controller;
 
+import com.ez.business.bean.SystemAttributeKey;
 import com.ez.common.mvc.ModelAndViewFactory;
 import com.ez.common.spring.SpringContextUtil;
 import com.ez.common.util.FileUtil;
 import com.ez.common.util.IdGenerator;
+import com.ez.wx.service.SystemAttributeMgr;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,8 +44,8 @@ public class UploadFileController {
     public ModelAndView upload(HttpServletRequest request, HttpServletResponse responese) throws Exception {
         log.debug("file upload");
         // String a = request.getParameter("a");
-
-//        Path dirPath = checkAndCreateUploadFileDir("");
+        String url = SystemAttributeMgr.newInstance().getPathValue(SystemAttributeKey.UPLOAD_PATH);
+        Path dirPath = checkAndCreateUploadFileDir(url);
 
         IdGenerator idGenerator = SpringContextUtil.getBean("idGenerator");
         List<Map<String, String>> filesMap = Lists.newArrayList();
@@ -55,8 +58,8 @@ public class UploadFileController {
                 String originalFilename = oldFile.getOriginalFilename();
                 String suffix = FileUtil.fileSuffix(originalFilename);
                 String newFileName = idGenerator.nextId() + suffix;
-//                File newFile = dirPath.resolve(newFileName).toFile();
-//                FileUtils.copyInputStreamToFile(oldFile.getInputStream(), newFile);
+                File newFile = dirPath.resolve(newFileName).toFile();
+                FileUtils.copyInputStreamToFile(oldFile.getInputStream(), newFile);
                 Map<String, String> fileMap = Maps.newHashMap();
                 fileMap.put("old", originalFilename);
                 fileMap.put("new", newFileName);

@@ -1,7 +1,12 @@
 package com.ez.wx.service;
 
 import com.ez.business.bean.FileInfo;
+import com.ez.common.progress.Progresses;
+import com.ez.common.thread.ThreadExecutor;
+import com.ez.wx.service.process.ImportStudentinfoStarter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +25,15 @@ import java.util.List;
 @Service
 public class ProcessStudentInfoService {
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public String process(List<FileInfo> fileInfos) {
-        return "";
+        Progresses progresses = new Progresses(false);
+        String key = progresses.saveToCache("ips");
+        ImportStudentinfoStarter starter = new ImportStudentinfoStarter(jdbcTemplate, progresses, fileInfos);
+        ThreadExecutor.getInstance().getExecutorService().submit(starter);
+        return key;
     }
 
 }

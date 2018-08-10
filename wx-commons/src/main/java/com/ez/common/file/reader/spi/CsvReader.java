@@ -15,7 +15,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -30,23 +30,23 @@ import java.util.List;
  */
 public class CsvReader implements FileProcess {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private String filepath;
+    private Path filepath;
     private HeaderMetadata headerMetadata = new HeaderMetadata();
     private List<String> lines;
     private int curRowIdx = 1;
 
-    public CsvReader(String filepath) {
+    public CsvReader(Path filepath) {
         this(filepath, "utf-8");
     }
 
-    public CsvReader(String filepath, String encoding) {
+    public CsvReader(Path filepath, String encoding) {
         this.filepath = filepath;
         init(encoding);
     }
 
     private void init(String encoding) {
         try {
-            lines = FileUtils.readLines(new File(filepath), encoding);
+            lines = FileUtils.readLines(filepath.toFile(), encoding);
             if (lines.isEmpty()) {
                 Throwables.propagate(new RuntimeException(String.format("csv文件%s没有数据", filepath)));
             }

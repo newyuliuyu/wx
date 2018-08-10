@@ -81,6 +81,7 @@
                         return;
                     }
 
+
                     var date = new Date(parseInt(progress.time));
                     var msgHTML = new Array();
                     msgHTML.push('<span id="');
@@ -102,9 +103,11 @@
 
                     //onlyShowErrorMsg为fase显示信息，当onlyShowErrorMsg为true并且有错误信息才能显示
                     if (!opts.onlyShowErrorMsg || (opts.onlyShowErrorMsg && progress.msgType === 1)) {
-                        $target.find('.myDetailMsg').append(msgHTML.join(''));
-                        var scrollHeight = $target.find('.myDetailMsg').get(0).scrollHeight;
-                        $target.find('.myDetailMsg').scrollTop(scrollHeight);
+                        if (progress.message && progress.message.length != 0) {
+                            $target.find('.myDetailMsg').append(msgHTML.join(''));
+                            var scrollHeight = $target.find('.myDetailMsg').get(0).scrollHeight;
+                            $target.find('.myDetailMsg').scrollTop(scrollHeight);
+                        }
                     }
 
                     if (idx === size - 1) {

@@ -1,9 +1,11 @@
 package com.ez.common.progress;
 
+import com.ez.common.cache.MemoryCache;
 import com.ez.common.util.IdGenerator;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -91,6 +93,24 @@ public class Progresses {
             listener.listener(events, over.get());
             listener = listeners.poll();
         }
+    }
+
+    public String saveToCache() {
+
+        return saveToCache("");
+    }
+
+    public String saveToCache(String prefix) {
+        String key = "" + idGenerator.nextId();
+        if (!StringUtils.isEmpty(prefix)) {
+            key = prefix + "-" + key;
+        }
+        MemoryCache.instance().put(key, this);
+        return key;
+    }
+
+    public static Progresses getFromCache(String key) {
+        return MemoryCache.instance().getValue(key);
     }
 
     public void print() {

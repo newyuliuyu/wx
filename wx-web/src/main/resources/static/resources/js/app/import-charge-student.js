@@ -156,6 +156,7 @@
             });
 
             $('.okButton').click(function () {
+                $(this).attr('disabled', "true");
                 var fileNames = [];
                 $('#studentFiles>div').each(function (idx, item) {
                     var oldfile = $(item).attr('old');

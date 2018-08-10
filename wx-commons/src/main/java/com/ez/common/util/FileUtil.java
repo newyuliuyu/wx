@@ -1,6 +1,8 @@
 package com.ez.common.util;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * ClassName: FileUtil <br/>
@@ -14,14 +16,20 @@ import java.io.File;
  */
 public class FileUtil {
 
-    public static boolean dirNotExistAndCreate(File file){
-        if(file.isDirectory() && file.exists()){
+    public static boolean dirNotExistAndCreate(File file) {
+        if (file.isDirectory() && file.exists()) {
             file.mkdirs();
         }
         return true;
     }
 
     public static String fileSuffix(String fileName) {
+        Path path = Paths.get(fileName);
+        return fileSuffix(path);
+    }
+
+    public static String fileSuffix(Path filepath) {
+        String fileName = filepath.getFileName().toString();
         int idx = fileName.lastIndexOf('.');
         return fileName.substring(idx);
     }

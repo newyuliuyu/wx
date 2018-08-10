@@ -24,7 +24,7 @@ import java.util.Map;
 public class StudentInfoTemplate implements DownloadTemplate {
     @Override
     public String name() {
-        return "学生信息魔板.xls";
+        return "学生信息模板";
     }
 
     @Override

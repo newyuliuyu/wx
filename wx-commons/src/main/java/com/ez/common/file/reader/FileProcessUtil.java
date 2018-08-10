@@ -11,6 +11,7 @@ import com.ez.common.file.reader.spi.CsvReader;
 import com.ez.common.file.reader.spi.DbfReader;
 import com.ez.common.file.reader.spi.Excel2007Reader;
 import com.ez.common.file.reader.spi.ExcelReader;
+import com.ez.common.util.FileUtil;
 import com.google.common.base.Throwables;
 
 import java.nio.file.Path;
@@ -28,14 +29,19 @@ import java.nio.file.Paths;
  */
 public class FileProcessUtil {
     public static FileProcess getFileProcess(String filepath) {
-        String prefix = getPrefix(filepath).toLowerCase();
-        if (prefix.equals("xls")) {
+        Path path = Paths.get(filepath);
+        return getFileProcess(path);
+    }
+
+    public static FileProcess getFileProcess(Path filepath) {
+        String suffix = FileUtil.fileSuffix(filepath).toLowerCase();
+        if (suffix.equals(".xls")) {
             return new ExcelReader(filepath);
-        } else if (prefix.equals("xlsx")) {
+        } else if (suffix.equals(".xlsx")) {
             return new Excel2007Reader(filepath);
-        } else if (prefix.equals("dbf")) {
+        } else if (suffix.equals(".dbf")) {
             return new DbfReader(filepath);
-        } else if (prefix.equals("csv") || prefix.equals("txt")) {
+        } else if (suffix.equals(".csv") || suffix.equals(".txt")) {
             return new CsvReader(filepath);
         } else {
             Throwables.propagate(

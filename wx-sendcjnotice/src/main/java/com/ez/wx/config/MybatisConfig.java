@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  * @since JDK 1.7+
  */
 @Configuration
-@MapperScan(basePackages = {"com.ez.wx.dao"}, sqlSessionFactoryRef = "sqlSessionFactoryBean")
+@MapperScan(basePackages = {"com.ez.**.dao"}, sqlSessionFactoryRef = "sqlSessionFactoryBean")
 public class MybatisConfig {
 
 

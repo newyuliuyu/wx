@@ -16,8 +16,8 @@ import com.linuxense.javadbf.DBFReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Path;
 
 /**
  * ClassName: DBFReader <br/>
@@ -31,21 +31,21 @@ import java.io.FileInputStream;
  */
 public class DbfReader implements FileProcess {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private String filepath;
+    private Path filepath;
     private FileInputStream in;
     private DBFReader reader;
     private HeaderMetadata headerMetadata = new HeaderMetadata();
     private Object[] curRowValues;
     private int rowIdx = 1;
 
-    public DbfReader(String filepath) {
+    public DbfReader(Path filepath) {
         this.filepath = filepath;
         init();
     }
 
     private void init() {
         try {
-            in = new FileInputStream(new File(filepath));
+            in = new FileInputStream(filepath.toFile());
             reader = new DBFReader(in);
             reader.setCharactersetName("GBK");
 

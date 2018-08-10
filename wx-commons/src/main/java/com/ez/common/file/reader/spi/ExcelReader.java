@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,20 +34,20 @@ public class ExcelReader implements FileProcess {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private static DecimalFormat decimalFormat = new DecimalFormat("#.######");
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private String filepath;
+    private Path filepath;
     private Workbook wb;
     private Sheet sheet;
     private HeaderMetadata headerMetadata = new HeaderMetadata();
     private int curRowIdx = 1;
 
-    public ExcelReader(String filepath) {
+    public ExcelReader(Path filepath) {
         this.filepath = filepath;
         open();
     }
 
     private void open() {
         try {
-            wb = WorkbookFactory.create(new File(filepath));
+            wb = WorkbookFactory.create(filepath.toFile());
             sheet = wb.getSheetAt(0);
             int rowNum = sheet.getPhysicalNumberOfRows();
             headerMetadata.setTotalRow(rowNum);
