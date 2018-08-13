@@ -52,6 +52,18 @@ public class SystemAttributeMgr {
         } catch (Exception e) {
             log.warn("系统版本好没有找到", e);
         }
+        try {
+            SystemAttribute systemAttribute = SpringContextUtil.getBean("wxProxURL");
+            systemAttributeMap.put(systemAttribute.getAttrName(), systemAttribute);
+        } catch (Exception e) {
+            log.warn("系统版本好没有找到", e);
+        }
+        try {
+            SystemAttribute systemAttribute = SpringContextUtil.getBean("studentReportURL");
+            systemAttributeMap.put(systemAttribute.getAttrName(), systemAttribute);
+        } catch (Exception e) {
+            log.warn("系统版本好没有找到", e);
+        }
 
     }
 

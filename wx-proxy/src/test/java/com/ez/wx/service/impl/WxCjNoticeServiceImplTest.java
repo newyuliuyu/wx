@@ -1,9 +1,9 @@
 package com.ez.wx.service.impl;
 
+import com.ez.business.bean.wx.WxNoticeContent;
+import com.ez.business.bean.wx.WxNoticeContentValue;
+import com.ez.business.bean.wx.WxNoticeData;
 import com.ez.common.json.Json2;
-import com.ez.wx.bean.WxNoticeContent;
-import com.ez.wx.bean.WxNoticeContentValue;
-import com.ez.wx.bean.WxNoticeData;
 import com.ez.wx.service.WxNoticeService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

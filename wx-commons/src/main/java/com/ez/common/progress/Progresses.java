@@ -105,8 +105,12 @@ public class Progresses {
         if (!StringUtils.isEmpty(prefix)) {
             key = prefix + "-" + key;
         }
-        MemoryCache.instance().put(key, this);
-        return key;
+        return saveToCacheWithCustomKey(key);
+    }
+
+    public String saveToCacheWithCustomKey(String customKey) {
+        MemoryCache.instance().put(customKey, this);
+        return customKey;
     }
 
     public static Progresses getFromCache(String key) {

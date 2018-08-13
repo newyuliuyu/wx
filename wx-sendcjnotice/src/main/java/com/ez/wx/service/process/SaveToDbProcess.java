@@ -1,5 +1,6 @@
 package com.ez.wx.service.process;
 
+import com.ez.business.bean.SUUKeyHelper;
 import com.ez.business.bean.StudentInfo;
 import com.ez.common.disruptor.Processor;
 import com.google.common.collect.Lists;
@@ -82,7 +83,7 @@ public class SaveToDbProcess implements Processor<StudentInfo> {
                         pst.setString(idx++, info.getPhone());
                         pst.setString(idx++, info.getIdCardNumber());
                         pst.setInt(idx++, info.getGender());
-                        pst.setString(idx++, info.getUUKey());
+                        pst.setString(idx++, SUUKeyHelper.getUUKey(info));
                         pst.setInt(idx++, info.getEntrySchoolYear());
                         pst.addBatch();
                     }

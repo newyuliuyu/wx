@@ -57,10 +57,10 @@
             <scope>test</scope>
         </dependency>
 
-
+        
         <dependency>
             <groupId>com.easytnt</groupId>
-            <artifactId>wx-commons</artifactId>
+            <artifactId>wx-business</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

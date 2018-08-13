@@ -1,6 +1,7 @@
 package com.ez.wx.service.process;
 
 import com.ez.business.bean.FileInfo;
+import com.ez.business.bean.SUUKeyHelper;
 import com.ez.business.bean.StudentInfo;
 import com.ez.wx.WxSendcjnoticeApplication;
 import com.google.common.collect.Lists;
@@ -36,7 +37,7 @@ public class ReaderStudentInfoFromFileTest {
         ReaderStudentInfoFromFile readFile = new ReaderStudentInfoFromFile(Lists.newArrayList(fileInfo));
         List<StudentInfo> studentInfos = readFile.read();
         studentInfos.stream().forEach(item -> {
-            System.out.println(item.getUUKey());
+            System.out.println(SUUKeyHelper.getUUKey(item));
         });
 
         Assert.assertTrue(studentInfos.size() == 20);

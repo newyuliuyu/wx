@@ -127,9 +127,9 @@ Number.prototype.toFixed2 = function (n) {
 }
 
 
-window.RequestHelper = {
+window.Rqs = {
         // 获取URL参数
-        QueryString: function (item) {
+        queryString: function (item) {
             var svalue = location.search.match(new RegExp(
                 "[\?\&]" + item + "=([^\&]*)(\&?)", "i"));
             return svalue ? svalue[1] : svalue;

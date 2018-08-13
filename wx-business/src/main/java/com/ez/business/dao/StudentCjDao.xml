@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ez.business.dao.StudentCjDao">
+
+    <select id="fetchStudentCj" resultType="map">
+		SELECT zkzh,name,code,schoolCode,schoolName,classCode,className,subjectName,score
+		FROM fact_score a
+		WHERE a.examId=#{examId}
+		LIMIT #{start},#{limit}
+	</select>
+
+</mapper>

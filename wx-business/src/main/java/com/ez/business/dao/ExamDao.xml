@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ez.business.dao.ExamDao">
+
+    <select id="getExam" resultType="com.ez.business.bean.Exam">
+		select
+		id,
+		name,
+		grade,
+		semester,
+		studySection,
+		entranceYear,
+		graduationYear,
+		wl,
+		examlevel,
+		subjectTag,
+		createDate,
+		beginDate,
+		endDate,
+		year,
+		month,
+		weekofyear,
+		weekofmonth,
+		uniqueKey,
+		analysisState,
+		isUnionExam as unionExam,
+		unionExamType,
+		schoolShowUnionExam
+		from data_exam where id=#{examId}
+	</select>
+
+</mapper>

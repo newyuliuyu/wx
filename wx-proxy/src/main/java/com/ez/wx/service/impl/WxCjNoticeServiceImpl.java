@@ -1,11 +1,11 @@
 package com.ez.wx.service.impl;
 
+import com.ez.business.bean.wx.WxNoticeData;
 import com.ez.common.httpclient.HCUtils;
 import com.ez.common.httpclient.HttpPostBuilder;
 import com.ez.common.httpclient.RequestResult;
 import com.ez.common.json.Json2;
 import com.ez.common.wx.bean.WxConsts;
-import com.ez.wx.bean.WxNoticeData;
 import com.ez.wx.service.WxAccessTokenService;
 import com.ez.wx.service.WxNoticeService;
 import lombok.extern.slf4j.Slf4j;

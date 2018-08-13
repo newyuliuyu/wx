@@ -1,8 +1,8 @@
 package com.ez.wx.controller;
 
+import com.ez.business.bean.wx.WxNoticeData;
 import com.ez.common.json.Json2;
 import com.ez.common.mvc.ModelAndViewFactory;
-import com.ez.wx.bean.WxNoticeData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;

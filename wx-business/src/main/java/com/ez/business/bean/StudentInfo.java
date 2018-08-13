@@ -1,6 +1,5 @@
 package com.ez.business.bean;
 
-import com.ez.common.util.MD5;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -30,10 +29,5 @@ public class StudentInfo {
     private String idCardNumber;
     private int entrySchoolYear;
 
-    public String getUUKey() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(name).append(entrySchoolYear).append(schoolCode).append(clazzCode);
-        return MD5.toMD5(sb.toString());
-    }
 
 }

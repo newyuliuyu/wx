@@ -1,6 +1,7 @@
 package com.ez.wx.service;
 
-import com.ez.wx.bean.WxNoticeData;
+
+import com.ez.business.bean.wx.WxNoticeData;
 
 /**
  * ClassName: WxNoticeService <br/>
