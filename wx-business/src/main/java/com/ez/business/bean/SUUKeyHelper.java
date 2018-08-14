@@ -13,6 +13,9 @@ import com.ez.common.util.MD5;
  * @since JDK 1.7+
  */
 public class SUUKeyHelper {
+    public static String getUUKey(WxBoundStudent studentInfo) {
+        return getUUKey(studentInfo.getName(), studentInfo.getEntrySchoolYear(), studentInfo.getSchoolCode(), studentInfo.getClazzCode());
+    }
     public static String getUUKey(StudentInfo studentInfo) {
         return getUUKey(studentInfo.getName(), studentInfo.getEntrySchoolYear(), studentInfo.getSchoolCode(), studentInfo.getClazzCode());
     }

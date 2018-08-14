@@ -8,6 +8,7 @@ import com.ez.business.bean.wx.WxNoticeContent;
 import com.ez.business.bean.wx.WxNoticeContentValue;
 import com.ez.business.bean.wx.WxNoticeData;
 import com.ez.business.service.ExamService;
+import com.ez.business.service.WxBoundStudentService;
 import com.ez.common.httpclient.HCUtils;
 import com.ez.common.httpclient.HttpPostBuilder;
 import com.ez.common.httpclient.RequestResult;
@@ -16,14 +17,9 @@ import com.ez.common.spring.SpringContextUtil;
 import com.ez.wx.service.SystemAttributeMgr;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.util.StringUtils;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -42,9 +38,11 @@ public class SendStudentCjService {
     private Exam exam;
     private String sendNoticeUrl;
     private String studentReportURL;
+    private WxBoundStudentService wxBoundStudentService;
 
     public SendStudentCjService(long examId) {
         this.jdbcTemplate = SpringContextUtil.getBean("jdbcTemplate");
+        this.wxBoundStudentService = SpringContextUtil.getBean("WxBoundStudentService");
         ExamService examService = SpringContextUtil.getBean(ExamService.class);
         this.exam = examService.getExam(examId);
         this.sendNoticeUrl = SystemAttributeMgr.newInstance().getPathValue(SystemAttributeKey.wxProxyURL);
@@ -72,9 +70,14 @@ public class SendStudentCjService {
         String json = Json2.toJson(wxNoticeData);
         HttpPost post = HttpPostBuilder.create(sendNoticeUrl).buildJson(json);
         HCUtils hcUtils = HCUtils.createDefault();
-        RequestResult rrs = hcUtils.exec(post);
-        hcUtils.close();
-
+        try {
+            RequestResult rrs = hcUtils.exec(post);
+        } catch (Exception e) {
+            data.setStatusNum(false);
+            data.setMsg(String.format("发送失败,%s", e.getMessage()));
+        } finally {
+            hcUtils.close();
+        }
     }
 
     private WxNoticeContent getContent(StudentCj data) {
@@ -101,26 +104,6 @@ public class SendStudentCjService {
     }
 
     public String getWXOpenId(StudentCj studentCj) {
-        final String sql = "SELECT wxopenid FROM wx_student_bound a WHERE a.uukey=? OR a.phone=? OR a.idCardNumber=?";
-        try {
-            String openId = jdbcTemplate.execute(sql, new PreparedStatementCallback<String>() {
-                @Override
-                public String doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {
-                    ps.setString(1, SUUKeyHelper.getUUKey(studentCj));
-                    ps.setString(2, studentCj.getCode());
-                    ps.setString(3, studentCj.getCode());
-                    ResultSet rs = ps.executeQuery();
-                    String result = "";
-                    if (rs.next()) {
-                        result = rs.getString(1);
-                    }
-                    return result;
-                }
-            });
-            return openId;
-        } catch (Exception e) {
-            log.error(sql, e);
-            throw new RuntimeException(e);
-        }
+        return wxBoundStudentService.fetchWxOpenId(SUUKeyHelper.getUUKey(studentCj), studentCj.getCode());
     }
 }

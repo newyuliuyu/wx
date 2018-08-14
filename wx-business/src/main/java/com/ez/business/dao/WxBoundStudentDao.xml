@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ez.business.dao.WxBoundStudentDao">
+
+    <select id="fetchWxOpenId" resultType="string">
+		SELECT wxopenid
+		FROM wx_student_bound a
+		WHERE a.uukey=#{uukey}
+		OR a.phone=#{code}
+		OR a.idCardNumber=#{code}
+	</select>
+    <insert id="boundStudent">
+        INSERT INTO wx_student_bound (wxopenid,name,schoolCode,schoolName,grade,clazzCode,clazzName,phone,
+        idCardNumber,gender,entrySchoolYear,uukey)
+        VALUES(#{wxBoundStudent.wxopenid},
+               #{wxBoundStudent.name},
+               #{wxBoundStudent.schoolCode},
+               #{wxBoundStudent.schoolName},
+               #{wxBoundStudent.grade},
+               #{wxBoundStudent.clazzCode},
+               #{wxBoundStudent.clazzName},
+               #{wxBoundStudent.phone},
+               #{wxBoundStudent.idCardNumber},
+               #{wxBoundStudent.gender},
+               #{wxBoundStudent.entrySchoolYear},
+               #{wxBoundStudent.uukey})
+    </insert>
+
+    <update id="updateBoundStudent">
+        update wx_student_bound
+        set name=#{wxBoundStudent.name},
+            schoolCode=#{wxBoundStudent.schoolCode},
+            schoolName=#{wxBoundStudent.schoolName},
+            grade=#{wxBoundStudent.grade},
+            clazzCode=#{wxBoundStudent.clazzCode},
+            clazzName=#{wxBoundStudent.clazzName},
+            phone=#{wxBoundStudent.phone},
+            idCardNumber=#{wxBoundStudent.idCardNumber},
+            gender=#{wxBoundStudent.gender},
+            entrySchoolYear=#{wxBoundStudent.entrySchoolYear},
+            uukey=#{wxBoundStudent.uukey})
+        wehre id=${wxBoundStudent.id}
+    </update>
+
+    <select id="fetchStudentCjWithZKZH" resultType="com.ez.business.bean.WxBoundStudent">
+        SELECT
+          id,
+          wxopenid,
+          schoolCode,
+          schoolName,
+          grade,
+          clazzCode,
+          clazzName,
+          phone,
+          idCardNumber,
+          gender,
+          entrySchoolYear
+        FROM
+         wx_student_bound a
+        where a.wxopenid=#{wxopenid}
+    </select>
+
+</mapper>
