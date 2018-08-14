@@ -57,7 +57,7 @@
         function publishExamStudentCj($btn) {
             var publishExamCjURL = sendCjURL + '/publish/student/cj/' + getExamId();
             var zkzh = [];
-            zkzh.push($btn.attr('zkzh'));
+            zkzh.push({id: $btn.attr('objId'), zkzh: $btn.attr('zkzh')});
             $ajax.corsPostJson(publishExamCjURL, zkzh).then(function (dataset) {
 
             }).always(function () {
@@ -80,7 +80,7 @@
                 var students = dataset.students;
                 console.log(students)
                 var $table = $('#yetpublishstudenttable tbody');
-                $.each(students,function (idx, item) {
+                $.each(students, function (idx, item) {
                     var htmls = [];
                     htmls.push('<tr>');
                     htmls.push('<td>' + (idx + 1) + '</td>');
@@ -92,7 +92,7 @@
                     } else {
                         htmls.push('<td class="text-danger">失败</td>');
                         htmls.push('<td>' + item.msg + '</td>');
-                        htmls.push('<td><button type="button" zkzh="' + item.zkzh + '" class="btn btn-outline-dark republishstudentcjBtn">重新发布</button></td>');
+                        htmls.push('<td><button type="button" objId="' + item.id + '" zkzh="' + item.zkzh + '" class="btn btn-outline-dark republishstudentcjBtn">重新发布</button></td>');
                     }
                     htmls.push('</tr>');
                     $table.append(htmls.join(''));
@@ -133,7 +133,9 @@
                     showPublishProgress();
                 }
             }).always(function () {
-                //console.log(arguments)
+                if(arguments[1]==="error"){
+                    dialog.alter("<span class='text-danger'>微信成绩发布服务器未启动，请联系管理人员</span>");
+                }
             });
         }
 

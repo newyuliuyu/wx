@@ -20,6 +20,9 @@ import java.util.Map;
 public interface StudentCjDao {
 
     List<Map<String, Object>> fetchStudentCj(@Param("examId") long examId,
-                                             @Param("start")int start,
-                                             @Param("limit")int limit);
+                                             @Param("start") int start,
+                                             @Param("limit") int limit);
+
+    List<Map<String, Object>> fetchStudentCjWithZKZH(@Param("examId") long examId,
+                                                     @Param("zkzhs") String[] zkzhs);
 }

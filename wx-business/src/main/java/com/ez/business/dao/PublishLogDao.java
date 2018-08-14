@@ -21,4 +21,6 @@ public interface PublishLogDao {
     List<StudentCj> fetchPublishStudentCj(@Param("examId") long examId,
                                           @Param("start") int start,
                                           @Param("limit") int limit);
+
+    void updatePublishStudentCj(@Param("studentCjs") List<StudentCj> studentCjs);
 }

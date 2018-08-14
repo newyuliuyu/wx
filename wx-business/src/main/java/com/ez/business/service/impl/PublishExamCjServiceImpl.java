@@ -26,16 +26,16 @@ public class PublishExamCjServiceImpl implements PublishExamCjService {
     private PublishLogDao publishLogDao;
 
     @Override
+    public void updatePublishStudentCj(List<StudentCj> studentCjs) {
+        publishLogDao.updatePublishStudentCj(studentCjs);
+    }
+
+    @Override
     public boolean isYetPublishStudentCj(long examId) {
         List<StudentCj> studentCjs = publishLogDao.fetchPublishStudentCj(examId, 0, 1);
         return !studentCjs.isEmpty();
     }
 
-
-    @Override
-    public void publishStudentCj(long examId, String[] zkzh) {
-
-    }
 
     @Override
     public List<StudentCj> fetchPublishCjLog(long examId) {

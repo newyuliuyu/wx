@@ -17,4 +17,6 @@ import java.util.List;
 public interface StudentCjService {
 
     List<StudentCj> fetchStudentCj(long examId);
+
+    List<StudentCj> fetchStudentCj(long examId, StudentCj[] studentCjs);
 }

@@ -16,9 +16,10 @@ import java.util.List;
  */
 public interface PublishExamCjService {
 
+    void updatePublishStudentCj(List<StudentCj> studentCjs);
+
     boolean isYetPublishStudentCj(long examId);
 
-    void publishStudentCj(long examId, String[] zkzh);
 
     List<StudentCj> fetchPublishCjLog(long examId);
 }

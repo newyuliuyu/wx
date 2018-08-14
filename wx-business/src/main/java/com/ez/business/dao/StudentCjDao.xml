@@ -8,5 +8,15 @@
 		WHERE a.examId=#{examId}
 		LIMIT #{start},#{limit}
 	</select>
+    <select id="fetchStudentCjWithZKZH" resultType="map">
+        SELECT zkzh,name,code,schoolCode,schoolName,classCode,className,subjectName,score
+        FROM fact_score a
+        WHERE a.examId=#{examId}
+        AND a.zkzh in
+        <foreach item="item" index="index" collection="zkzhs"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
 </mapper>

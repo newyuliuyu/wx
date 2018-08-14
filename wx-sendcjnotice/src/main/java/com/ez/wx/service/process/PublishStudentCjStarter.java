@@ -1,7 +1,5 @@
 package com.ez.wx.service.process;
 
-import com.ez.business.bean.Exam;
-import com.ez.business.service.ExamService;
 import com.ez.common.disruptor.EzEventPerformer;
 import com.ez.common.disruptor.ResultProcessor;
 import com.ez.common.progress.ProgressEvent;
@@ -21,19 +19,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class PublishStudentCjStarter implements Runnable {
     private Progresses progresses;
-    private Exam exam;
+    private long examId;
     private JdbcTemplate jdbcTemplate;
 
     public PublishStudentCjStarter(Progresses progresses, long examId) {
         this.progresses = progresses;
-        init(examId);
+        jdbcTemplate = SpringContextUtil.getBean("jdbcTemplate");
+        this.examId = examId;
     }
 
-    private void init(long examId) {
-        jdbcTemplate = SpringContextUtil.getBean("jdbcTemplate");
-        ExamService examService = SpringContextUtil.getBean(ExamService.class);
-        exam = examService.getExam(examId);
-    }
 
     @Override
     public void run() {
@@ -48,8 +42,8 @@ public class PublishStudentCjStarter implements Runnable {
 
     private void starter() {
 
-        PublishCjTask task = new PublishCjTask(exam.getId());
-        PublishStudnetCjProcess publishStudnetCjProcess = new PublishStudnetCjProcess(jdbcTemplate, exam);
+        PublishCjTask task = new PublishCjTask(examId);
+        PublishStudnetCjProcess publishStudnetCjProcess = new PublishStudnetCjProcess(examId);
         SaveStudentCjLogToDbProcess saveStudentCjLogToDbProcess = new SaveStudentCjLogToDbProcess(jdbcTemplate);
 
 

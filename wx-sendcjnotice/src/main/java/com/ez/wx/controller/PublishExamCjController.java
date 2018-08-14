@@ -68,11 +68,11 @@ public class PublishExamCjController {
 
     @RequestMapping(value = "/student/cj/{examId}")
     public ModelAndView publishstudentcj(@PathVariable long examId,
-                                         @RequestBody String[] zkzhs,
+                                         @RequestBody StudentCj[] studentCjs,
                                          HttpServletRequest request,
                                          HttpServletResponse responese) throws Exception {
         log.debug("publishstudentcj......");
-
+        startPublishCjStarter.publishStudentCj(examId, studentCjs);
         return ModelAndViewFactory.instance().build();
     }
 

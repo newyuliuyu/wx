@@ -28,4 +28,6 @@ public class PublishStudentCjStarterTest {
         starter.run();
         System.out.println();
     }
+
+
 }

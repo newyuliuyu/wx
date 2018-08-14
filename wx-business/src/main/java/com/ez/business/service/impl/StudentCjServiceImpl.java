@@ -10,8 +10,10 @@ import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ClassName: StudentCjServiceImpl <br/>
@@ -29,6 +31,32 @@ public class StudentCjServiceImpl implements StudentCjService {
     private StudentCjDao studentCjDao;
     @Autowired
     private ExamDao examDao;
+
+    @Override
+    public List<StudentCj> fetchStudentCj(long examId, StudentCj[] studentCjs) {
+        Exam exam = examDao.getExam(examId);
+        String[] zkzhs = Arrays.stream(studentCjs).map(StudentCj::getZkzh).collect(Collectors.toList()).toArray(new String[0]);
+        Map<String, StudentCj> oldStudentCjMap = Arrays.stream(studentCjs).collect(Collectors.toMap(StudentCj::getZkzh, cj -> cj));
+
+        Map<String, StudentCj> studentCjMap = Maps.newHashMap();
+        List<Map<String, Object>> list = studentCjDao.fetchStudentCjWithZKZH(examId, zkzhs);
+        for (Map<String, Object> map : list) {
+            StudentCj studentCj = mapToStudentCj(map);
+            StudentCj oldStudentCj = oldStudentCjMap.get(studentCj.getZkzh());
+            studentCj.setId(oldStudentCj.getId());
+            studentCj.setExamId(examId);
+            studentCj.setEntrySchoolYear(exam.getEntranceYear());
+
+            oldStudentCj = studentCjMap.get(studentCj.getZkzh());
+            if (oldStudentCj == null) {
+                oldStudentCj = studentCj;
+                studentCjMap.put(oldStudentCj.getZkzh(), oldStudentCj);
+            } else {
+                oldStudentCj.getSubjectCj().putAll(studentCj.getSubjectCj());
+            }
+        }
+        return Lists.newArrayList(studentCjMap.values());
+    }
 
     @Override
     public List<StudentCj> fetchStudentCj(long examId) {

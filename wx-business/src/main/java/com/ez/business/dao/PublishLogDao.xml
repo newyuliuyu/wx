@@ -20,4 +20,13 @@
 		LIMIT #{start}, #{limit};
 	</select>
 
+    <update id="updatePublishStudentCj">
+        <foreach collection="studentCjs" item="item" index="index" open="" close="" separator=";">
+            update wx_send_notice_log a
+            SET a.statusNum=#{item.statusNum},a.msg=#{item.msg}
+            where a.id = #{item.id}
+        </foreach>
+
+    </update>
+
 </mapper>
