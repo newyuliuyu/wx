@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ez.business.dao.PublishLogDao">
+
+    <select id="fetchPublishStudentCj" resultType="com.ez.business.bean.StudentCj">
+		SELECT
+		  id,
+		  examId,
+		  zkzh,
+		  name,
+		  schoolCode,
+		  schoolName,
+		  clazzCode,
+		  clazzName,
+		  statusNum,
+		  msg
+		FROM
+		  wx_send_notice_log a
+		WHERE a.examId=#{examId}
+		LIMIT #{start}, #{limit};
+	</select>
+
+</mapper>

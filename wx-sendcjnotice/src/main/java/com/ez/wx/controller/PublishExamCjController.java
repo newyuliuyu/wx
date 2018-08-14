@@ -1,5 +1,6 @@
 package com.ez.wx.controller;
 
+import com.ez.business.bean.StudentCj;
 import com.ez.business.service.PublishExamCjService;
 import com.ez.common.cache.MemoryCache;
 import com.ez.common.mvc.ModelAndViewFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * ClassName: PublishExamCjController <br/>
@@ -49,7 +51,7 @@ public class PublishExamCjController {
             sendStatus = 2;
         }
         if (sendStatus == 0) {
-            boolean yetPublish = publishExamCjService.checkYetPublishStudentCj(examId);
+            boolean yetPublish = publishExamCjService.isYetPublishStudentCj(examId);
             sendStatus = yetPublish ? 1 : sendStatus;
         }
         return ModelAndViewFactory.instance().with("sendStatus", sendStatus).build();
@@ -79,7 +81,7 @@ public class PublishExamCjController {
                                            HttpServletRequest request,
                                            HttpServletResponse responese) throws Exception {
         log.debug("loadpublishstudent......");
-
-        return ModelAndViewFactory.instance().build();
+        List<StudentCj> studentCjs = publishExamCjService.fetchPublishCjLog(examId);
+        return ModelAndViewFactory.instance().with("students", studentCjs).build();
     }
 }

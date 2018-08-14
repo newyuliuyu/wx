@@ -58,7 +58,7 @@
             var publishExamCjURL = sendCjURL + '/publish/student/cj/' + getExamId();
             var zkzh = [];
             zkzh.push($btn.attr('zkzh'));
-            $ajax.corsPostJson(publishExamCjURL, {}).then(function (dataset) {
+            $ajax.corsPostJson(publishExamCjURL, zkzh).then(function (dataset) {
 
             }).always(function () {
 
@@ -75,28 +75,30 @@
         }
 
         function loadYetPublishStudent() {
-            var checkURL = sendCjURL + '/publish/loadpublishstudent/' + examId;
+            var checkURL = sendCjURL + '/publish/loadpublishstudent/' + getExamId();
             $ajax.corsGetJson(checkURL).then(function (dataset) {
                 var students = dataset.students;
+                console.log(students)
                 var $table = $('#yetpublishstudenttable tbody');
-                $.each(function (idx, item) {
+                $.each(students,function (idx, item) {
                     var htmls = [];
                     htmls.push('<tr>');
                     htmls.push('<td>' + (idx + 1) + '</td>');
                     htmls.push('<td>' + item.name + '</td>');
                     if (item.statusNum) {
-                        htmls.push('<td>成功</td>');
+                        htmls.push('<td class="text-success">成功</td>');
+                        htmls.push('<td></td>');
                         htmls.push('<td></td>');
                     } else {
-                        htmls.push('<td>失败</td>');
+                        htmls.push('<td class="text-danger">失败</td>');
                         htmls.push('<td>' + item.msg + '</td>');
+                        htmls.push('<td><button type="button" zkzh="' + item.zkzh + '" class="btn btn-outline-dark republishstudentcjBtn">重新发布</button></td>');
                     }
-                    htmls.push('<td><button type="button" zkzh="' + item.zkzh + '" class="btn btn-outline-dark republishstudentcjBtn">重新发布</button></td>');
                     htmls.push('</tr>');
                     $table.append(htmls.join(''));
                 });
             }).always(function () {
-                console.log(arguments)
+                //console.log(arguments)
             });
         }
 
@@ -131,7 +133,7 @@
                     showPublishProgress();
                 }
             }).always(function () {
-                console.log(arguments)
+                //console.log(arguments)
             });
         }
 

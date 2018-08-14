@@ -22,6 +22,7 @@ import java.util.Map;
 @Builder
 @ToString
 public class StudentCj {
+    private int id;
     private long examId;
     private String name;
     private String zkzh;

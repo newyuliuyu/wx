@@ -26,7 +26,7 @@ public class CommonConfig {
     private String wxProxURL;
     @Value("${student.report.url}")
     private String studentReportURL;
-    @Value("${sys.version}")
+    @Value("${sys.version:1.0.1}")
     private String sysVersion = "1.0.0";
 
     @Bean

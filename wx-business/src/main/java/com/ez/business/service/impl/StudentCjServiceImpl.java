@@ -41,6 +41,7 @@ public class StudentCjServiceImpl implements StudentCjService {
             List<Map<String, Object>> list = studentCjDao.fetchStudentCj(examId, start, limit);
             for (Map<String, Object> map : list) {
                 StudentCj studentCj = mapToStudentCj(map);
+                studentCj.setExamId(examId);
                 studentCj.setEntrySchoolYear(exam.getEntranceYear());
                 StudentCj oldStudentCj = studentCjMap.get(studentCj.getZkzh());
                 if (oldStudentCj == null) {
@@ -80,6 +81,7 @@ public class StudentCjServiceImpl implements StudentCjService {
                 .schoolName(schoolName)
                 .clazzCode(clazzCode)
                 .clazzName(clazzName)
+                .subjectCj(Maps.newHashMap())
                 .build();
         studentCj.getSubjectCj().put(subjectName, score);
         return studentCj;
