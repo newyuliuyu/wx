@@ -29,7 +29,7 @@ public class StartPublishCjStarterTest {
 
     @Test
     public void publishStudentCj() throws Exception {
-        StudentCj studentCj = StudentCj.builder().zkzh("16901002").id(29).build();
+        StudentCj studentCj = StudentCj.builder().zkzh("16901017").id(20).build();
 
         startPublishCjStarter.publishStudentCj(196, new StudentCj[]{studentCj});
     }

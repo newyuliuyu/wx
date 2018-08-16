@@ -15,10 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
 import java.util.ArrayList;
@@ -73,6 +70,11 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
         c1.setFastJsonConfig(fastJsonConfig);
         converters.add(c1);
     }
+
+//    @Override
+//    protected void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+//        super.configureContentNegotiation(configurer);
+//    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

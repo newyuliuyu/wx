@@ -22,8 +22,6 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:ezconfig.properties")
 public class CommonConfig {
-    @Value("${wx.proxy.url}")
-    private String wxProxURL;
     @Value("${student.report.url}")
     private String studentReportURL;
     @Value("${sys.version:1.0.1}")
@@ -48,14 +46,6 @@ public class CommonConfig {
         return attribute;
     }
 
-    @Bean("wxProxURL")
-    public SystemAttribute wxProxURL() {
-        SystemAttribute attribute = new SystemAttribute();
-        attribute.setAttrName(SystemAttributeKey.wxProxyURL.toString());
-        attribute.setAliasName("微信代理服务器地址");
-        attribute.setValue(this.wxProxURL);
-        return attribute;
-    }
 
     @Bean("studentReportURL")
     public SystemAttribute studentReportURL() {

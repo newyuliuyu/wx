@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ez.business.dao.SubjectDao">
+
+    <select id="fecthExamSubjects" resultType="com.ez.business.bean.Subject">
+		SELECT
+		  id,
+		  examId,
+		  NAME,
+		  fullScore,
+		  kgFullScore,
+		  zgFullScore,
+		  wl,
+		  isMultiSubject,
+		  childSubjects,
+		  examSubjects,
+		  parentSubject,
+		  displayOrder,
+		  dataStatus,
+		  isZf,
+		  zfNotInclude,
+		  zfCjNotInclude,
+		  hasTeachClazz
+		FROM
+		  data_subject a
+		 WHERE a.examId=#{examId}
+	</select>
+
+</mapper>

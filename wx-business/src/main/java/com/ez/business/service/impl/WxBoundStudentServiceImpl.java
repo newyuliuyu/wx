@@ -19,26 +19,27 @@ import org.springframework.stereotype.Service;
 @Service("WxBoundStudentService")
 public class WxBoundStudentServiceImpl implements WxBoundStudentService {
 
+
     @Autowired
     private WxBoundStudentDao wxBoundStudentDao;
 
     @Override
     public String fetchWxOpenId(String uukey, String code) {
-        return null;
+        return wxBoundStudentDao.fetchWxOpenId(uukey,code);
     }
 
     @Override
     public void boundStudent(WxBoundStudent wxBoundStudent) {
-
+        wxBoundStudentDao.boundStudent(wxBoundStudent);
     }
 
     @Override
     public void udpateBoundStudent(WxBoundStudent wxBoundStudent) {
-
+        wxBoundStudentDao.updateBoundStudent(wxBoundStudent);
     }
 
     @Override
     public WxBoundStudent getWxBoundStudent(String wxopenid) {
-        return null;
+        return wxBoundStudentDao.getWxBoundStudent(wxopenid);
     }
 }

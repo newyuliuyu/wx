@@ -34,7 +34,7 @@ public class WxBoundStudentController {
     @Autowired
     private WxBoundStudentService wxBoundStudentService;
 
-    @RequestMapping(value = "/fetch/studentinfo/${wxopenid}")
+    @RequestMapping(value = "/fetch/studentinfo/{wxopenid}")
     public ModelAndView fetchStudentinfoWithWxopendid(@PathVariable String wxopenid,
                                                       HttpServletRequest request,
                                                       HttpServletResponse responese) throws Exception {
@@ -51,7 +51,7 @@ public class WxBoundStudentController {
         GradeInfo gradeInfo = GradeNameOrderHelper.getGradeInfo(wxBoundStudent.getGrade());
         wxBoundStudent.setEntrySchoolYear(gradeInfo.getEntranceYear());
         wxBoundStudentService.boundStudent(wxBoundStudent);
-        return ModelAndViewFactory.instance().with("status", "succes").build();
+        return ModelAndViewFactory.instance().with("status", "success").build();
     }
 
     @RequestMapping(value = "/bound/update", method = RequestMethod.POST)
@@ -62,7 +62,7 @@ public class WxBoundStudentController {
         GradeInfo gradeInfo = GradeNameOrderHelper.getGradeInfo(wxBoundStudent.getGrade());
         wxBoundStudent.setEntrySchoolYear(gradeInfo.getEntranceYear());
         wxBoundStudentService.udpateBoundStudent(wxBoundStudent);
-        return ModelAndViewFactory.instance().with("status", "succes").build();
+        return ModelAndViewFactory.instance().with("status", "success").build();
     }
 
 }

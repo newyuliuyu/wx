@@ -38,14 +38,15 @@
             idCardNumber=#{wxBoundStudent.idCardNumber},
             gender=#{wxBoundStudent.gender},
             entrySchoolYear=#{wxBoundStudent.entrySchoolYear},
-            uukey=#{wxBoundStudent.uukey})
-        wehre id=${wxBoundStudent.id}
+            uukey=#{wxBoundStudent.uukey}
+        where id=${wxBoundStudent.id}
     </update>
 
-    <select id="fetchStudentCjWithZKZH" resultType="com.ez.business.bean.WxBoundStudent">
+    <select id="getWxBoundStudent" resultType="com.ez.business.bean.WxBoundStudent">
         SELECT
           id,
           wxopenid,
+          name,
           schoolCode,
           schoolName,
           grade,

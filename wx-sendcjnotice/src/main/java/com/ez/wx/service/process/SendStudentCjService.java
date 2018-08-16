@@ -1,13 +1,11 @@
 package com.ez.wx.service.process;
 
-import com.ez.business.bean.Exam;
-import com.ez.business.bean.SUUKeyHelper;
-import com.ez.business.bean.StudentCj;
-import com.ez.business.bean.SystemAttributeKey;
+import com.ez.business.bean.*;
 import com.ez.business.bean.wx.WxNoticeContent;
 import com.ez.business.bean.wx.WxNoticeContentValue;
 import com.ez.business.bean.wx.WxNoticeData;
 import com.ez.business.service.ExamService;
+import com.ez.business.service.SubjectService;
 import com.ez.business.service.WxBoundStudentService;
 import com.ez.common.httpclient.HCUtils;
 import com.ez.common.httpclient.HttpPostBuilder;
@@ -15,12 +13,15 @@ import com.ez.common.httpclient.RequestResult;
 import com.ez.common.json.Json2;
 import com.ez.common.spring.SpringContextUtil;
 import com.ez.wx.service.SystemAttributeMgr;
+import com.google.common.primitives.Ints;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ClassName: SendStudentCjService <br/>
@@ -39,18 +40,25 @@ public class SendStudentCjService {
     private String sendNoticeUrl;
     private String studentReportURL;
     private WxBoundStudentService wxBoundStudentService;
+    private List<Subject> subjects;
 
     public SendStudentCjService(long examId) {
         this.jdbcTemplate = SpringContextUtil.getBean("jdbcTemplate");
         this.wxBoundStudentService = SpringContextUtil.getBean("WxBoundStudentService");
         ExamService examService = SpringContextUtil.getBean(ExamService.class);
         this.exam = examService.getExam(examId);
-        this.sendNoticeUrl = SystemAttributeMgr.newInstance().getPathValue(SystemAttributeKey.wxProxyURL);
+        SubjectService subjectService = SpringContextUtil.getBean(SubjectService.class);
+        this.subjects = subjectService.fecthExamSubjects(examId);
+        this.subjects = this.subjects.stream().sorted((s1, s2) -> Ints.compare(s1.getDisplayOrder(), s2.getDisplayOrder())).collect(Collectors.toList());
+
+        this.sendNoticeUrl = SystemAttributeMgr.newInstance().getPathValue(SystemAttributeKey.wxProxyUrl);
         this.sendNoticeUrl = sendNoticeUrl + "/wxcjnotice";
         this.studentReportURL = SystemAttributeMgr.newInstance().getPathValue(SystemAttributeKey.studentReportURl);
     }
 
     public void sendNotice(StudentCj studentCj) {
+        studentCj.setStatusNum(true);
+        studentCj.setMsg("");
         String wxopenid = getWXOpenId(studentCj);
         if (StringUtils.isEmpty(wxopenid)) {
             studentCj.setStatusNum(false);
@@ -88,9 +96,11 @@ public class SendStudentCjService {
         StringBuilder remark = new StringBuilder();
 
         Map<String, Double> cjScoreMap = data.getSubjectCj();
-        for (String subjectName : cjScoreMap.keySet()) {
-            double score = cjScoreMap.get(subjectName);
-            remark.append(subjectName + ":" + score + "分\n");
+        for (Subject subject : subjects) {
+            Double score = cjScoreMap.get(subject.getName());
+            if (score != null) {
+                remark.append(subject.getName() + ":" + score + "分\n");
+            }
         }
         remark.append("详细报告请点击这里进行查看!");
         content.put("remark", new WxNoticeContentValue(remark.toString(), "#173177"));
@@ -98,8 +108,7 @@ public class SendStudentCjService {
     }
 
     private String getStudentReportURl(StudentCj cj) {
-        String url = studentReportURL.replaceAll("EXAMID", cj.getExamId() + "");
-        url = studentReportURL.replaceAll("ZKZH", cj.getZkzh());
+        String url = studentReportURL.replaceAll("EXAMID", cj.getExamId() + "").replaceAll("ZKZH", cj.getZkzh());
         return url;
     }
 

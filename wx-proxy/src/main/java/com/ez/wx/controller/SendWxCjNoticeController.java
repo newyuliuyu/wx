@@ -3,7 +3,10 @@ package com.ez.wx.controller;
 import com.ez.business.bean.wx.WxNoticeData;
 import com.ez.common.json.Json2;
 import com.ez.common.mvc.ModelAndViewFactory;
+import com.ez.wx.service.WxNoticeService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +29,15 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/wxcjnotice")
 @Slf4j
 public class SendWxCjNoticeController {
+    @Autowired(required = false)
+    @Qualifier("wxCjNoticeService")
+    private WxNoticeService service;
 
     @RequestMapping()
     public ModelAndView sendNotice(@RequestBody WxNoticeData wxNoticeData, HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println();
         log.debug(Json2.toJson(wxNoticeData));
+        service.notice(wxNoticeData);
         return ModelAndViewFactory.instance().with("ok", "ok").build();
     }
 }

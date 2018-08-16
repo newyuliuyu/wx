@@ -75,6 +75,9 @@ public class HCUtils {
         try {
             response = client.execute(httpUriRequest, context);
 //            printResponse(response);
+            if (response.getStatusLine().getStatusCode() == 404) {
+                throw new RuntimeException("请求的地址不存在:url:" + httpUriRequest.getURI().toString());
+            }
             logger.debug(response.getStatusLine().toString());
             HttpEntity httpEntity = response.getEntity();
             String content = EntityUtils.toString(httpEntity, Consts.UTF_8);

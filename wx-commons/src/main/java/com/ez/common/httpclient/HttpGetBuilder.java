@@ -41,7 +41,10 @@ public class HttpGetBuilder {
     }
 
     private void buildURL() {
-        StringBuilder sb = new StringBuilder(url+"?");
+        StringBuilder sb = new StringBuilder(url);
+        if (!params.isEmpty()) {
+            sb.append("?");
+        }
         int idx = 0;
         for (String name : params.keySet()) {
             if (idx++ != 0) {

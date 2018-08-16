@@ -48,7 +48,9 @@ public enum SystemAttributeKey {
     studentCjServerSSHUrl("sys.student.cj.server.ssh.url"),//链接学生成绩文件服务的ssh链接地址
     studentCjServerSavePath("sys.student.cj.server.save.path"),//学生成绩文件服务保存在文件目录
 
-    wxProxyURL("wx.proxy.url"),//学生成绩文件服务保存在文件目录
+    wxProxyUrl("wx.proyx.url"),//微信代理程序url
+    wxPublishCjUrl("wx.publish.cj.url"),//微信成绩发布程序url
+    wxWebUrl("wx.web.url"),//微信web程序url
     studentReportURl("student.report.url");//学生成绩文件服务保存在文件目录
     private String key;
 

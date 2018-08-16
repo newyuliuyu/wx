@@ -7,6 +7,7 @@ import com.ez.common.httpclient.RequestResult;
 import com.ez.common.json.Json2;
 import com.ez.common.wx.WxConfig;
 import com.ez.common.wx.bean.WxConsts;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpGet;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +22,14 @@ import org.springframework.stereotype.Component;
  * @since JDK 1.7+
  */
 @Component
+@Slf4j
 public class WxAccessTokenService {
     private Object monitorObj = new Object();
 
     public String fetchAccessToken() {
         WxConfig wxConfig = WxConfig.getInstance();
         if (wxConfig.isAccessTokenExpired()) {
+            log.warn("access token已过期,重新获取");
             //updateAccessToken();
         }
         return WxConfig.getInstance().getAccessToken();
@@ -47,7 +50,7 @@ public class WxAccessTokenService {
                 String json = result.getContent();
                 Object jsonObj = Json2.parse(json);
                 String accessToken = JSONPath.eval(jsonObj, "$.access_token").toString();
-                int expiresIn = Integer.parseInt(JSONPath.eval(json, "$.expires_in").toString());
+                int expiresIn = Integer.parseInt(JSONPath.eval(jsonObj, "$.expires_in").toString());
                 wxConfig.updateAccessToken(accessToken, expiresIn);
             }
         }
