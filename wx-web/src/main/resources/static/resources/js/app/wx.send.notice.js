@@ -8,6 +8,7 @@
         'css!style/public'
     ];
     define(models, function ($, $ajax, Vue) {
+        var sendCjURL = window.app.config.wxProxyURL;
 
         function sendNoticeEvent() {
             $('#sendNotice').click(function () {
@@ -26,7 +27,7 @@
             conent.keyword2 = {value: $('#keyword2').val().trim(), color: '#212529'}
             conent.remark = {value: $('#remark').val().trim(), color: '#212529'}
 
-            $ajax.corsPostJson('/wxcjnotice', noticeData).then(function () {
+            $ajax.corsPostJson(sendCjURL + '/wxcjnotice', noticeData).then(function () {
                 console.log(arguments)
             }).always(function () {
                 console.log(arguments)

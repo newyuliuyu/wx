@@ -11,9 +11,10 @@
 
     <modules>
         <module>wx-commons</module>
+        <module>wx-business</module>
         <module>wx-proxy</module>
         <module>wx-sendcjnotice</module>
-        <module>wx-business</module>
+        <module>wx-web</module>
     </modules>
 
     <dependencies>
@@ -125,6 +126,13 @@
             <version>3.3.4</version>
             <scope>compile</scope>
         </dependency>
+        <!-- set servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -145,6 +153,13 @@
                 <configuration>
                     <argLine>-javaagent:${settings.localRepository}/org/jmockit/jmockit/1.40/jmockit-1.40.jar</argLine>
                     <useSystemClassLoader>true</useSystemClassLoader>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>
