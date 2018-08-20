@@ -11,6 +11,7 @@ public class WxWebApplicationTests {
 
     @Test
     public void contextLoads() {
+        System.out.println();
     }
 
 }
