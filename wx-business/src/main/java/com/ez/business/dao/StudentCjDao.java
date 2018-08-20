@@ -1,5 +1,7 @@
 package com.ez.business.dao;
 
+import com.ez.business.bean.Exam;
+import com.ez.business.bean.Student;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +27,12 @@ public interface StudentCjDao {
 
     List<Map<String, Object>> fetchStudentCjWithZKZH(@Param("examId") long examId,
                                                      @Param("zkzhs") String[] zkzhs);
+
+
+    Student getStudentInfo(@Param("zkzh") String zkzh);
+
+    List<Exam> fetchStudentExams(@Param("studentCode") String studentCode);
+
+    List<Map<String, Object>> fetchStudentSubjectScores(@Param("examId") long examId,
+                                                   @Param("zkzh") String zkzh);
 }

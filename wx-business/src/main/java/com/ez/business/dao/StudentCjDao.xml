@@ -19,4 +19,55 @@
         </foreach>
     </select>
 
+
+    <select id="getStudentInfo" resultType="com.ez.business.bean.Student">
+        SELECT a.zkzh,a.code,a.name,a.schoolCode,a.schoolName,a.classCode AS clazzCode,a.className AS clazzName
+        FROM fact_score a WHERE a.zkzh=#{zkzh} LIMIT 1
+    </select>
+
+    <select id="fetchStudentExams" resultType="com.ez.business.bean.Exam">
+        SELECT
+          a.id,
+          a.name,
+          a.grade,
+          a.semester,
+          a.studySection,
+          a.entranceYear,
+          a.graduationYear,
+          a.wl,
+          a.examlevel,
+          a.subjectTag,
+          a.createDate,
+          a.beginDate,
+          a.endDate,
+          a.year,
+          a.month,
+          a.weekofyear,
+          a.weekofmonth,
+          a.uniqueKey,
+          a.analysisState,
+          a.isUnionExam,
+          a.unionExamType,
+          a.schoolShowUnionExam,
+          a.hasTeachClazzSubject
+        FROM data_exam a
+        INNER JOIN (
+            SELECT DISTINCT examId FROM fact_score WHERE CODE=#{studentCode}
+        ) b ON a.id=b.examId
+        WHERE a.analysisState=1 ORDER BY a.beginDate LIMIT 10;
+    </select>
+
+    <select id="fetchStudentSubjectScores" resultType="map">
+        SELECT
+            a.score,
+            b.id subjectId,
+            b.name subjectName,
+            b.fullScore,
+            b.isMultiSubject,
+            b.isZf
+        FROM fact_score a
+        INNER JOIN data_subject b ON a.subjectId=b.id
+        WHERE a.examId=#{examId} AND a.code=#{zkzh};
+    </select>
+
 </mapper>

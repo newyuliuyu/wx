@@ -1,6 +1,7 @@
 package com.ez.business.service.impl;
 
 import com.ez.business.bean.Exam;
+import com.ez.business.bean.Student;
 import com.ez.business.bean.StudentCj;
 import com.ez.business.dao.ExamDao;
 import com.ez.business.dao.StudentCjDao;
@@ -31,6 +32,21 @@ public class StudentCjServiceImpl implements StudentCjService {
     private StudentCjDao studentCjDao;
     @Autowired
     private ExamDao examDao;
+
+    @Override
+    public Student getStudentInfo(String zkzh) {
+        return studentCjDao.getStudentInfo(zkzh);
+    }
+
+    @Override
+    public List<Exam> fetchStudentExams(String studentCode) {
+        return studentCjDao.fetchStudentExams(studentCode);
+    }
+
+    @Override
+    public List<Map<String, Object>> fetchStudentSubjectScores(long examId, String zkzh) {
+        return studentCjDao.fetchStudentSubjectScores(examId, zkzh);
+    }
 
     @Override
     public List<StudentCj> fetchStudentCj(long examId, StudentCj[] studentCjs) {
