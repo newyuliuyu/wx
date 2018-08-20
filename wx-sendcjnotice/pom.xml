@@ -183,9 +183,9 @@
         </profile>
         <!-- 阿里云环境 -->
         <profile>
-            <id>product</id>
+            <id>aliyun</id>
             <properties>
-                <env>product</env>
+                <env>aliyun</env>
             </properties>
             <dependencies>
                 <dependency>
