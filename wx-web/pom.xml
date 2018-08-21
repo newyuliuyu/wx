@@ -193,8 +193,8 @@
                             <force>false</force>
                             <nosuffix>true</nosuffix>
                             <linebreakpos>-1</linebreakpos>
-                            <sourceDirectory>target/classes</sourceDirectory>
-                            <!--<sourceDirectory>src/main/resources/static/</sourceDirectory>-->
+                            <!--<sourceDirectory>target/classes</sourceDirectory>-->
+                            <sourceDirectory>src/main/resources</sourceDirectory>
                             <outputDirectory>target/myjs/</outputDirectory>
                             <excludes>
                                 <exclude>**/*.min*.js</exclude>

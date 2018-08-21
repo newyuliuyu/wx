@@ -13,10 +13,13 @@
         'css!style/dialog'
     ];
     define(models, function ($, $ajax, dialog, WebUploader, dot) {
-        var sendcjURL = window.app.config.sendcjURL;
-        function getSendCjURL(){
+        var sendCjURL = window.app.config.sendcjURL;
+
+        function getSendCjURL() {
+
             return sendCjURL;
         }
+
         $(window).resize(function () {          //当浏览器大小变化时
             // console.log($(window).height());          //浏览器时下窗口可视区域高度
             // console.log($(document).height());        //浏览器时下窗口文档的高度
