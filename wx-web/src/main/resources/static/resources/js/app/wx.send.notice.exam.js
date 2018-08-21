@@ -116,6 +116,7 @@
         function showPublishProgress() {
             var onlyKey = 'publishexamcj-' + getExamId();
             var url = getSendCjURL() + '/progress';
+            $('#progressDIV').show();
             $('#progressDIV').progress({
                 url: url,
                 onlyKey: onlyKey,
