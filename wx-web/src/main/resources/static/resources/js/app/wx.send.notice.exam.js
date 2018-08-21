@@ -5,6 +5,7 @@
         'dialog',
         'css!style/dialog',
         'ezconfig',
+        'js/commons/JQuery.progress',
         'bootstrap',
         'css!style/bootstrap/bootstrap.min',
         'css!style/font-awesome',
