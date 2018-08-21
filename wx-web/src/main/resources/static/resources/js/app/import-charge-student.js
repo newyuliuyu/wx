@@ -14,7 +14,9 @@
     ];
     define(models, function ($, $ajax, dialog, WebUploader, dot) {
         var sendcjURL = window.app.config.sendcjURL;
-
+        function getSendCjURL(){
+            return sendCjURL;
+        }
         $(window).resize(function () {          //当浏览器大小变化时
             // console.log($(window).height());          //浏览器时下窗口可视区域高度
             // console.log($(document).height());        //浏览器时下窗口文档的高度
@@ -81,7 +83,7 @@
 
 
         function initUploadStudentBtn() {
-            var url = sendcjURL + "/upload";
+            var url = getSendCjURL() + "/upload";
             var flashURL = window.app.rootPath + 'Uploader.swf';
             var uploader = WebUploader.create({
                 // 选完文件后，是否自动上传。
@@ -151,7 +153,7 @@
 
         function init() {
             $('.downloadTemplate').click(function () {
-                var url = sendcjURL + "/download/studentInfoTemplate";
+                var url = getSendCjURL() + "/download/studentInfoTemplate";
                 $.download(url);
             });
 
@@ -164,14 +166,14 @@
                     fileNames.push({oldfile: oldfile, newfile: newfile});
                 });
                 console.log(fileNames)
-                var url = sendcjURL + "/process";
+                var url = getSendCjURL() + "/process";
                 $('#overShow').hide();
                 $('#progressDIV').show();
                 $ajax.corsPostJson(url, fileNames).then(function (dataset) {
                     console.log('then', arguments)
                     var onlyKey = dataset.onlyKey;
                     $('#progressDIV').progress({
-                        url: sendcjURL + '/progress',
+                        url: getSendCjURL() + '/progress',
                         onlyKey: onlyKey,
                         cors: true,
                         finishedCallBack: function () {

@@ -12,6 +12,9 @@
     ];
     define(models, function ($, $ajax, dialog) {
         var sendCjURL = window.app.config.sendcjURL;
+        function getSendCjURL(){
+            return sendCjURL;
+        }
         $(window).resize(function () {          //当浏览器大小变化时
             // console.log($(window).height());          //浏览器时下窗口可视区域高度
             // console.log($(document).height());        //浏览器时下窗口文档的高度
@@ -55,7 +58,7 @@
         }
 
         function publishExamStudentCj($btn) {
-            var publishExamCjURL = sendCjURL + '/publish/student/cj/' + getExamId();
+            var publishExamCjURL = getSendCjURL() + '/publish/student/cj/' + getExamId();
             var zkzh = [];
             zkzh.push({id: $btn.attr('objId'), zkzh: $btn.attr('zkzh')});
             $ajax.corsPostJson(publishExamCjURL, zkzh).then(function (dataset) {
@@ -66,7 +69,7 @@
         }
 
         function publishExamCj() {
-            var publishExamCjURL = sendCjURL + '/publish/cj/' + getExamId();
+            var publishExamCjURL = getSendCjURL() + '/publish/cj/' + getExamId();
             $ajax.corsPostJson(publishExamCjURL, {}).then(function (dataset) {
                 showPublishProgress();
             }).always(function () {
@@ -75,7 +78,7 @@
         }
 
         function loadYetPublishStudent() {
-            var checkURL = sendCjURL + '/publish/loadpublishstudent/' + getExamId();
+            var checkURL = getSendCjURL() + '/publish/loadpublishstudent/' + getExamId();
             $ajax.corsGetJson(checkURL).then(function (dataset) {
                 var students = dataset.students;
                 console.log(students)
@@ -108,8 +111,9 @@
 
         function showPublishProgress() {
             var onlykey = 'publishexamcj-' + getExamId();
+            var url = getSendCjURL() + '/progress';
             $('#progressDIV').progress({
-                url: sendcjURL + '/progress',
+                url: url,
                 onlyKey: onlyKey,
                 cors: true,
                 finishedCallBack: function () {
@@ -120,7 +124,7 @@
 
         function checkPublicStudentCj() {
             var examId = getExamId();
-            var checkURL = sendCjURL + '/publish/checksendcj/' + examId;
+            var checkURL = getSendCjURL() + '/publish/checksendcj/' + examId;
             $ajax.corsGetJson(checkURL).then(function (dataset) {
                 if (dataset.sendStatus === 1) {
                     //已经发布完毕
@@ -133,7 +137,7 @@
                     showPublishProgress();
                 }
             }).always(function () {
-                if(arguments[1]==="error"){
+                if (arguments[1] === "error") {
                     dialog.alter("<span class='text-danger'>微信成绩发布服务器未启动，请联系管理人员</span>");
                 }
             });
