@@ -30,7 +30,7 @@ public class WxAccessTokenService {
         WxConfig wxConfig = WxConfig.getInstance();
         if (wxConfig.isAccessTokenExpired()) {
             log.warn("access token已过期,重新获取");
-            //updateAccessToken();
+            updateAccessToken();
         }
         return WxConfig.getInstance().getAccessToken();
     }
