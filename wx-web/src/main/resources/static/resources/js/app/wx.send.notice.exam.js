@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     var models = ['jquery',
-        'js/commons/ajax',
+        'ajax',
         'dialog',
         'css!style/dialog',
         'ezconfig',
