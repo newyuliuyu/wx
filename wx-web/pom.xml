@@ -10,9 +10,9 @@
     <groupId>com.easytnt</groupId>
     <artifactId>wx-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <!--<packaging>jar</packaging>-->
+    <packaging>jar</packaging>
     <!--用来打包成war文件-->
-    <packaging>war</packaging>
+    <!--<packaging>war</packaging>-->
 
     <name>wx-web</name>
     <description>Demo project for Spring Boot</description>
@@ -115,6 +115,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--打包jar需要-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>repackage</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
             </plugin>
         </plugins>
     </build>
