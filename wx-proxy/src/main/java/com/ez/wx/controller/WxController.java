@@ -32,6 +32,7 @@ import java.io.PrintWriter;
 public class WxController {
     @RequestMapping(method = RequestMethod.GET)
     public void wxRegister(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        log.debug("wx get.....");
         String value = WxRegister.create(WxRegister::new, request).validate().getResult();
         PrintWriter out = response.getWriter();
         out.print(value);

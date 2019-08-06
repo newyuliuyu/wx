@@ -2,6 +2,7 @@
     "use strict";
     var models = ['jquery',
         'ajax',
+        'ezconfig',
         'dialog',
         'css!style/dialog',
         'ezconfig',

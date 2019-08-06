@@ -22,6 +22,6 @@ public class WxSubscribeEvent {
     @WxProcessInvokeMethod
     public WxXmlOutMessage subscribe(WxXmlMessage inMsg) {
 
-        return WxXmlOutTextMessage.TEXT().content("欢迎来到易考乐学公众号！").fromUser(inMsg.getToUserName()).toUser(inMsg.getFromUserName()).build();
+        return WxXmlOutTextMessage.TEXT().content("欢迎来我们的公众号！").fromUser(inMsg.getToUserName()).toUser(inMsg.getFromUserName()).build();
     }
 }

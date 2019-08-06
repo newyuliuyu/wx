@@ -48,6 +48,7 @@ public class WxAccessTokenService {
                 HCUtils hcUtils = HCUtils.createDefault();
                 RequestResult result = hcUtils.exec(get);
                 String json = result.getContent();
+                log.debug("获取Access-Token的json[{}]", json);
                 Object jsonObj = Json2.parse(json);
                 String accessToken = JSONPath.eval(jsonObj, "$.access_token").toString();
                 int expiresIn = Integer.parseInt(JSONPath.eval(jsonObj, "$.expires_in").toString());

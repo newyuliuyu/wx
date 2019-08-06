@@ -3,6 +3,7 @@
     var models = ['jquery',
         'js/commons/ajax',
         'vue',
+        'ezconfig',
         'bootstrap',
         'css!style/bootstrap/bootstrap.min',
         'css!style/public'

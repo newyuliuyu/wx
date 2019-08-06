@@ -10,5 +10,5 @@
 </html>
 
 <script style="text/javascript">
-    window.location.href='http://www.easytnt.com/wxpub/weixin2/html/register.html?s=${openid}'
+    window.location.href='http://www.tfkclass.com/wxpub/weixin2/html/register.html?s=${openid}'
 </script>
