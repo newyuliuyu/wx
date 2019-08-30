@@ -205,6 +205,29 @@
             </build>
         </profile>
 
+        <profile>
+            <id>luok_aliyun</id>
+            <properties>
+                <env>luok_aliyun</env>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                    <!--用来打包成war文件-->
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-tomcat</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+            <build>
+
+            </build>
+        </profile>
+
     </profiles>
 
 </project>
