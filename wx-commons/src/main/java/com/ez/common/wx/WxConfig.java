@@ -20,6 +20,9 @@ public class WxConfig {
     private String aesKey;
     private String mchId;
     private String apiKey;
+    private String notifyUrl;
+    private String wxsendcj;
+    private String myAccessTokenServerURL;
 
     //内存更新
     private volatile String accessToken;
@@ -92,7 +95,35 @@ public class WxConfig {
         this.expiresTime = System.currentTimeMillis() + (expiresInSeconds - 200) * 1000l;
     }
 
+    public String getNotifyUrl() {
+        return notifyUrl;
+    }
+
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+    }
+
     public String getAccessToken() {
         return accessToken;
+    }
+
+    public String getWxsendcj() {
+        return wxsendcj;
+    }
+
+    public void setWxsendcj(String wxsendcj) {
+        this.wxsendcj = wxsendcj;
+    }
+
+    public long getExpiresTime() {
+        return expiresTime;
+    }
+
+    public String getMyAccessTokenServerURL() {
+        return myAccessTokenServerURL;
+    }
+
+    public void setMyAccessTokenServerURL(String myAccessTokenServerURL) {
+        this.myAccessTokenServerURL = myAccessTokenServerURL;
     }
 }

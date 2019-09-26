@@ -22,6 +22,11 @@ import java.nio.file.Paths;
 public class FileAndPathTest {
 
     @Test
+    public void test01() throws Exception {
+        System.out.println(System.currentTimeMillis());
+    }
+
+    @Test
     public void pathTest() throws Exception {
         URL url = Resources.getResource("");
         Path path = Paths.get(url.toURI());

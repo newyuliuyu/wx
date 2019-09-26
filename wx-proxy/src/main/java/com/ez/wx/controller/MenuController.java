@@ -28,4 +28,9 @@ public class MenuController {
         WxConfig wxConfig = WxConfig.getInstance();
         return ModelAndViewFactory.instance("menu/menu").with("model", model).with("appId", wxConfig.getAppId()).build();
     }
+    @RequestMapping("/2/{model}")
+    public ModelAndView menu2(@PathVariable String model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        WxConfig wxConfig = WxConfig.getInstance();
+        return ModelAndViewFactory.instance("menu/menu2").with("model", model).with("appId", wxConfig.getAppId()).build();
+    }
 }

@@ -24,4 +24,6 @@ public interface WxBoundStudentDao {
     void updateBoundStudent(@Param("wxBoundStudent") WxBoundStudent wxBoundStudent);
 
     WxBoundStudent getWxBoundStudent(@Param("wxopenid") String wxopenid);
+
+    int addStudentInfo(@Param("wxBoundStudent") WxBoundStudent wxBoundStudent);
 }

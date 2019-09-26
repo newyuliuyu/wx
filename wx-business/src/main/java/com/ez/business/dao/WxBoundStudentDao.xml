@@ -55,10 +55,30 @@
           phone,
           idCardNumber,
           gender,
-          entrySchoolYear
+          entrySchoolYear,
+          uukey as dbUukey
         FROM
          wx_student_bound a
         where a.wxopenid=#{wxopenid}
     </select>
+
+
+    <insert id="addStudentInfo">
+        INSERT INTO wx_student_info (name,schoolCode,schoolName,grade,
+          clazzCode,clazzName,phone,idCardNumber,gender,entrySchoolYear,uukey)
+        VALUES
+          (#{wxBoundStudent.name},
+            #{wxBoundStudent.schoolCode},
+            #{wxBoundStudent.schoolName},
+            #{wxBoundStudent.grade},
+            #{wxBoundStudent.clazzCode},
+            #{wxBoundStudent.clazzName},
+            #{wxBoundStudent.phone},
+            #{wxBoundStudent.idCardNumber},
+            #{wxBoundStudent.gender},
+            #{wxBoundStudent.entrySchoolYear},
+            #{wxBoundStudent.dbUukey}
+          );
+    </insert>
 
 </mapper>

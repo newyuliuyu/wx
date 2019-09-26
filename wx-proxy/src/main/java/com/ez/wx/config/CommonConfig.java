@@ -1,6 +1,7 @@
 package com.ez.wx.config;
 
 import com.ez.common.spring.SpringContextUtil;
+import com.ez.common.util.IdGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,5 +23,10 @@ public class CommonConfig {
     @Bean
     public SpringContextUtil springContextUtil() {
         return new SpringContextUtil();
+    }
+
+    @Bean
+    public IdGenerator idGenerator() {
+        return new IdGenerator();
     }
 }

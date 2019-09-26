@@ -59,7 +59,7 @@ public class SpringMVCExceptionResolver extends SimpleMappingExceptionResolver {
 //            code = myException.getCode();
 //            message = myException.getMessage();
 //        }
-        Responser rs = new Responser.Builder().failure().code(code).msg(message).detail(detail).create();
+        Responser rs = new Responser.Builder().failure().code(code).msg(ex.getMessage()).detail(detail).create();
         if (viewName != null && !"".equals(viewName)) {
             return ModelAndViewFactory.instance(viewName).with("status", rs).build();
         } else {

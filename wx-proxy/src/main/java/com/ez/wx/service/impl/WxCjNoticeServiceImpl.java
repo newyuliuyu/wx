@@ -41,7 +41,13 @@ public class WxCjNoticeServiceImpl implements WxNoticeService {
         String url = WxConsts.URL_TEMPLATE_SEND;
         url = url.replaceAll("ACCESS_TOKEN", accessToken);
         HttpPost post = HttpPostBuilder.create(url).buildJson(Json2.toJson(data));
-        RequestResult result = HCUtils.createDefault().exec(post);
-        log.debug(result.getContent());
+        HCUtils hcUtils = HCUtils.createDefault();
+        try {
+            RequestResult result = hcUtils.exec(post);
+            log.debug(result.getContent());
+        } finally {
+            hcUtils.close();
+        }
+
     }
 }

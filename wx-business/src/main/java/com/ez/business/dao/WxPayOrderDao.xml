@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ez.business.dao.WxPayOrderDao">
+
+	<insert id="create">
+		INSERT INTO wx_pay_order (orderNum,wxopenid,moeny,orderTimestamp)
+		VALUES
+		  (#{wxPayOrder.orderNum},
+			#{wxPayOrder.wxopenid},
+			#{wxPayOrder.moeny},
+			#{wxPayOrder.orderTimestamp}
+		  )
+	</insert>
+
+	<update id="updatePayOfWxPayOrder">
+		update wx_pay_order set pay=#{wxPayOrder.pay} where orderNum=#{wxPayOrder.orderNum} and wxopenid=#{wxPayOrder.wxopenid}
+	</update>
+
+</mapper>

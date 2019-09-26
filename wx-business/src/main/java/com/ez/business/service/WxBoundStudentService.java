@@ -25,4 +25,6 @@ public interface WxBoundStudentService {
     void udpateBoundStudent(WxBoundStudent wxBoundStudent);
 
     WxBoundStudent getWxBoundStudent(String wxopenid);
+
+    void addStudentInfo(String wxopenid);
 }

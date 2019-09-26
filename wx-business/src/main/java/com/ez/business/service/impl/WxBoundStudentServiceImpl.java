@@ -25,7 +25,7 @@ public class WxBoundStudentServiceImpl implements WxBoundStudentService {
 
     @Override
     public String fetchWxOpenId(String uukey, String code) {
-        return wxBoundStudentDao.fetchWxOpenId(uukey,code);
+        return wxBoundStudentDao.fetchWxOpenId(uukey, code);
     }
 
     @Override
@@ -41,5 +41,11 @@ public class WxBoundStudentServiceImpl implements WxBoundStudentService {
     @Override
     public WxBoundStudent getWxBoundStudent(String wxopenid) {
         return wxBoundStudentDao.getWxBoundStudent(wxopenid);
+    }
+
+    @Override
+    public void addStudentInfo(String wxopenid) {
+        WxBoundStudent wxBoundStudent = wxBoundStudentDao.getWxBoundStudent(wxopenid);
+        wxBoundStudentDao.addStudentInfo(wxBoundStudent);
     }
 }

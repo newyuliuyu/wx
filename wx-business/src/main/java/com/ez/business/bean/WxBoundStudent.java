@@ -31,6 +31,7 @@ public class WxBoundStudent {
     private String idCardNumber;
     private int gender;
     private int entrySchoolYear;
+    private String dbUukey;
 
     public String getUukey() {
         return SUUKeyHelper.getUUKey(this);

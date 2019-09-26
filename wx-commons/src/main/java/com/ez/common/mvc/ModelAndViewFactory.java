@@ -21,6 +21,8 @@ public class ModelAndViewFactory {
 
     private ModelAndViewFactory(String view) {
         this.view = view;
+        Responser rs = new Responser.Builder().success().create();
+        with("status", rs);
     }
 
     public ModelAndViewFactory with(String name, Object value) {

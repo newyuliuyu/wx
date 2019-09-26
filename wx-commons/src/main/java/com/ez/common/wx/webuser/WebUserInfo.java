@@ -1,5 +1,7 @@
 package com.ez.common.wx.webuser;
 
+import lombok.ToString;
+
 /**
  * ClassName: WebUserInfo <br/>
  * Function:  ADD FUNCTION. <br/>
@@ -10,6 +12,7 @@ package com.ez.common.wx.webuser;
  * @version v1.0
  * @since JDK 1.7+
  */
+@ToString
 public class WebUserInfo {
     private String openid;
     private String nickname;

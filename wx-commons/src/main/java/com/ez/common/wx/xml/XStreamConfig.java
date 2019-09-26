@@ -30,6 +30,8 @@ public class XStreamConfig {
     }
 
 
+
+
     private static XStream config_WxXmlMessage() {
         XStream xstream = XStreamInitializer.getInstance();
         xstream.processAnnotations(WxXmlMessage.class);
