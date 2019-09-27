@@ -8,6 +8,7 @@ import com.ez.common.json.Json2;
 import com.ez.common.wx.WxConfig;
 import com.ez.common.wx.bean.WxConsts;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.HttpGet;
 import org.springframework.stereotype.Component;
 
@@ -36,12 +37,44 @@ public class WxServerFetchAccessToken {
         WxConfig wxConfig = WxConfig.getInstance();
         if (wxConfig.isAccessTokenExpired()) {
             log.warn("access token已过期,重新获取");
-            updateAccessToken();
+            if(StringUtils.isEmpty(wxConfig.getMyAccessTokenServerURL())){
+                updateAccessTokenFromWxServer();
+            }else{
+                updateAccessTokenFromMyServer();
+            }
+
         }
         return WxConfig.getInstance();
     }
 
-    private void updateAccessToken() {
+    private void updateAccessTokenFromMyServer() {
+        log.debug("从自己的无服务上获取微信的access token");
+        WxConfig wxConfig = WxConfig.getInstance();
+        synchronized (monitorObj) {
+            if (wxConfig.isAccessTokenExpired()) {
+                String url = wxConfig.getMyAccessTokenServerURL() + "/wx/access";
+                HttpGet get = HttpGetBuilder.create(url)
+                        .addHeader("Content-type", "application/json; charset=utf-8")
+                        .build();
+                HCUtils hcUtils = HCUtils.createDefault();
+                String json = "";
+                try {
+                    RequestResult result = hcUtils.exec(get);
+                    json = result.getContent();
+                    log.debug("获取Access-Token的json[{}]", json);
+                } finally {
+                    hcUtils.close();
+                }
+                Object jsonObj = Json2.parse(json);
+                String accessToken = JSONPath.eval(jsonObj, "$.access_token").toString();
+                int expiresIn = Integer.parseInt(JSONPath.eval(jsonObj, "$.expires_in").toString());
+                wxConfig.updateAccessToken(accessToken, expiresIn);
+            }
+        }
+    }
+
+    private void updateAccessTokenFromWxServer() {
+        log.debug("从微信的服务上获取微信的access token");
         WxConfig wxConfig = WxConfig.getInstance();
         synchronized (monitorObj) {
             if (wxConfig.isAccessTokenExpired()) {
