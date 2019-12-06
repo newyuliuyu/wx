@@ -1,6 +1,11 @@
 package com.ez.wx;
 
 import com.alibaba.fastjson.JSONPath;
+import com.ez.common.httpclient.HCUtils;
+import com.ez.common.httpclient.HttpGetBuilder;
+import com.ez.common.httpclient.RequestResult;
+import com.ez.common.wx.WxConfig;
+import org.apache.http.client.methods.HttpGet;
 import org.junit.Test;
 
 /**
@@ -21,4 +26,6 @@ public class JsonPathTest {
        Object object = JSONPath.read(json,"$.wxPayOrder.orderNum");
        System.out.println();
     }
+
+
 }

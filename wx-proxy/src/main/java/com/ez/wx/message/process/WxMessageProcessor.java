@@ -38,7 +38,7 @@ public class WxMessageProcessor {
 
     public String getXml() {
         if (outMessage == null) {
-            return "";
+            return "success";
         }
         return outMessage.toXml();
     }

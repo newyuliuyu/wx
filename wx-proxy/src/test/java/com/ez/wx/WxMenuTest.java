@@ -5,6 +5,7 @@ import com.ez.common.httpclient.RequestResult;
 import com.ez.common.json.Json2;
 import com.ez.common.wx.WxConfig;
 import com.ez.common.wx.bean.WxConsts;
+import com.ez.wx.service.WxAccessTokenService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.http.client.methods.HttpGet;
@@ -13,6 +14,7 @@ import org.apache.http.entity.StringEntity;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -33,6 +35,15 @@ import java.util.Map;
 @SpringBootTest(classes = WxProxyApplication.class)
 public class WxMenuTest {
 
+    @Autowired
+    private WxAccessTokenService accessTokenService;
+
+    @Test
+    public void getAccesToken() throws Exception{
+        String accessToken = accessTokenService.fetchAccessToken();
+        System.out.println(accessToken);
+    }
+
     @Test
     public void getMenu() throws Exception {
         WxConfig wxConfig = WxConfig.getInstance();
@@ -49,6 +60,54 @@ public class WxMenuTest {
         System.out.println(result.getContent());
     }
 
+    @Test
+    public void createTFKMenu() throws Exception {
+        //罗凯的公众号菜单
+        Map<String, Object> menu1 = Maps.newHashMap();
+        menu1.put("type", "view");
+        menu1.put("name", "注册");
+        menu1.put("url", "http://www.tfkclass.com/wxproxy/menu/student-bound");
+
+        Map<String, Object> menu2 = Maps.newHashMap();
+        menu2.put("type", "click");
+        menu2.put("name", "辅导册");
+        menu2.put("key", "student_pdf_report_001");
+
+        Map<String, Object> menu3 = Maps.newHashMap();
+        menu3.put("type", "view");
+        menu3.put("name", "订购");
+        menu3.put("url", "http://www.tfkclass.com/wxproxy/menu/pay");
+
+        List<Map<String, Object>> mainMenus = Lists.newArrayList();
+        mainMenus.add(menu1);
+        mainMenus.add(menu2);
+        mainMenus.add(menu3);
+
+        Map<String, Object> mainMenu = Maps.newHashMap();
+        mainMenu.put("button", mainMenus);
+
+        String json = Json2.toJson(mainMenu);
+        System.out.println(json);
+        create(json);
+    }
+
+    private void create(String json)throws Exception{
+        WxConfig wxConfig = WxConfig.getInstance();
+        Assert.assertTrue("AccessToken已超时", !wxConfig.isAccessTokenExpired());
+        String url = WxConsts.URL_CREATE_MENU.replace("ACCESS_TOKEN", wxConfig.getAccessToken());
+        HttpPost post = new HttpPost(url);
+        StringEntity entity = new StringEntity(json, "utf-8");// 解决中文乱码问题
+        entity.setContentEncoding("UTF-8");
+        entity.setContentType("application/json");
+        post.setEntity(entity);
+        post.addHeader("Content-type", "application/json; charset=utf-8");
+        post.setHeader("Accept", "application/json");
+
+        HCUtils hcUtils = HCUtils.createDefault();
+        RequestResult result = hcUtils.exec(post);
+
+        System.out.println(result.getContent());
+    }
 
     @Test
     public void createMenu() throws Exception {

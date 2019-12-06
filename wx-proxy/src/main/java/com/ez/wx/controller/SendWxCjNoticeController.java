@@ -26,16 +26,22 @@ import javax.servlet.http.HttpServletResponse;
  * @since JDK 1.7+
  */
 @Controller
-@RequestMapping("/wxcjnotice")
 @Slf4j
 public class SendWxCjNoticeController {
     @Autowired(required = false)
     @Qualifier("wxCjNoticeService")
     private WxNoticeService service;
 
-    @RequestMapping()
+    @RequestMapping("/wxcjnotice")
     public ModelAndView sendNotice(@RequestBody WxNoticeData wxNoticeData, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println();
+        log.debug("进入/wxcjnotice．．．．");
+        log.debug(Json2.toJson(wxNoticeData));
+        service.notice(wxNoticeData);
+        return ModelAndViewFactory.instance().with("ok", "ok").build();
+    }
+    @RequestMapping("/wxpdfreportnotice")
+    public ModelAndView wxpdfreportnotice(@RequestBody WxNoticeData wxNoticeData, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        log.debug("进入/wxpdfreportnotice．．．．");
         log.debug(Json2.toJson(wxNoticeData));
         service.notice(wxNoticeData);
         return ModelAndViewFactory.instance().with("ok", "ok").build();

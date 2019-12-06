@@ -81,7 +81,7 @@ public class WxMessageHandlerMapping {
         if (parseClass.hasEventClass()) {
             MessageProcessDefine define = parseClass.getEventDefine();
             mpdMap.put(define.getEvent(), define);
-            initMsgValidateClass(define, parseClass);
+            initEventValidateClass(define, parseClass);
             initObjClass(define, parseClass);
         }
     }

@@ -24,7 +24,7 @@ public class WxConfiguration {
     @ConfigurationProperties(prefix = "wx")
     public WxConfig wxConfig() {
         WxConfig wxConfig = new WxConfig();
-//        String accesseToken="12_EVnZa99mKrY7ERAC6YwP4yuR-VfyQcdy1dfDQqBSzYf79V2BRGP-rOiNk6tbmPHa8_JpTUAbzH4SFasjbOONh3pf4vPag0430g-v9E0p3ixsUPv--cbJ69B9TsW3986-L8wydNNjQ2Sv-taCJOCcAEAAFT";
+//        String accesseToken="27_Elya3C_3GumdPXuVhgRKsFW6weLQO53EQ3zBiXZ1ETQIzcJHtqJ0StXRXq3mBDm3wM_iU0TTrrcU5FBM2FJvLtepjONiark56Cf31AR4S4MwBMpxWwL2gRjDVnEKENjACAYSB";
 //        wxConfig.updateAccessToken(accesseToken,7200);
         return wxConfig;
     }

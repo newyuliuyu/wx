@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ez.business.dao.StudentPdfReportDao">
+
+    <select id="getStudentInfo" resultType="com.ez.business.bean.ExamStudentInfo">
+		SELECT MAX(a.examId) examId,
+        a.code
+        FROM fact_score a
+        WHERE a.schoolCode=#{schoolCode}
+        AND a.classCode=#{clazzCode}
+        AND a.name=#{name}
+	</select>
+    <select id="getPdfReportInfos" resultType="com.ez.business.bean.PdfReportInfo">
+		SELECT examId,
+          code,
+          subjectId,
+          subjectName,
+          onlykey,
+          addr
+        FROM data_student_improve_report a
+        WHERE a.examId=#{examId}
+        AND a.code=#{code}
+	</select>
+    <select id="getPdfReportInfo" resultType="com.ez.business.bean.PdfReportInfo">
+		SELECT examId,
+          code,
+          subjectId,
+          subjectName,
+          onlykey,
+          addr
+        FROM data_student_improve_report a
+        WHERE a.onlykey=#{onlykey}
+	</select>
+    <select id="getStudentSubjectCjs" resultType="com.ez.business.bean.SubjectCj">
+		SELECT a.subjectId,a.subjectName,a.score
+        FROM fact_score a
+        WHERE a.examId=#{examId} AND a.code=#{code}
+	</select>
+
+
+</mapper>

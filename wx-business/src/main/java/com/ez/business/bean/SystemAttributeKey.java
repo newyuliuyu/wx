@@ -51,7 +51,10 @@ public enum SystemAttributeKey {
     wxProxyUrl("wx.proyx.url"),//微信代理程序url
     wxPublishCjUrl("wx.publish.cj.url"),//微信成绩发布程序url
     wxWebUrl("wx.web.url"),//微信web程序url
-    studentReportURl("student.report.url");//学生成绩文件服务保存在文件目录
+    studentReportURl("student.report.url"),//学生成绩文件服务保存在文件目录
+    noPermissionUrl("no.permission.url"),//无权限提示页面
+    studentPdfReportDemoUrl("student.pdf.report.demo.url"),//权限页面
+    studentPdfReportUrlPrefix("student.pdf.report.url.prefix");//查看学生报告前最
     private String key;
 
     private SystemAttributeKey(String key) {

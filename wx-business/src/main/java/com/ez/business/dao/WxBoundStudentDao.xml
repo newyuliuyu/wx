@@ -81,4 +81,11 @@
           );
     </insert>
 
+    <select id="isPay" resultType="boolean">
+        SELECT COUNT(1) FROM wx_student_info a
+        WHERE a.uukey=#{uukey}
+         OR a.phone=#{code}
+         OR a.idCardNumber=#{code}
+    </select>
+
 </mapper>

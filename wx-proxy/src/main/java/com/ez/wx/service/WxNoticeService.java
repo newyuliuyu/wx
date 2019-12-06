@@ -16,4 +16,5 @@ import com.ez.business.bean.wx.WxNoticeData;
 public interface WxNoticeService {
 
     void notice(WxNoticeData data);
+    void notice2(WxNoticeData data);
 }

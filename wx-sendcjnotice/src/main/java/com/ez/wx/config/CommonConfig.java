@@ -22,8 +22,15 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:ezconfig.properties")
 public class CommonConfig {
+
+
     @Value("${student.report.url}")
     private String studentReportURL;
+    @Value("${student.pdf.report.url.prefix}")
+    private String studentPdfReportUrlPrefix;
+    @Value("${no.permission.url}")
+    private String noPermissionUrl;
+
     @Value("${sys.version:1.0.1}")
     private String sysVersion = "1.0.0";
 
@@ -53,6 +60,22 @@ public class CommonConfig {
         attribute.setAttrName(SystemAttributeKey.studentReportURl.toString());
         attribute.setAliasName("学生个人报告地址");
         attribute.setValue(this.studentReportURL);
+        return attribute;
+    }
+    @Bean("studentPdfReportUrlPrefix")
+    public SystemAttribute studentPdfReportUrlPrefix() {
+        SystemAttribute attribute = new SystemAttribute();
+        attribute.setAttrName(SystemAttributeKey.studentPdfReportUrlPrefix.toString());
+        attribute.setAliasName("学生pdf报告前缀");
+        attribute.setValue(this.studentPdfReportUrlPrefix);
+        return attribute;
+    }
+    @Bean("noPermissionUrl")
+    public SystemAttribute noPermissionUrl() {
+        SystemAttribute attribute = new SystemAttribute();
+        attribute.setAttrName(SystemAttributeKey.noPermissionUrl.toString());
+        attribute.setAliasName("权限页面");
+        attribute.setValue(this.noPermissionUrl);
         return attribute;
     }
 

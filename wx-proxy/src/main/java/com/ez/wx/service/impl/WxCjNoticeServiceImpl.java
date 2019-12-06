@@ -30,13 +30,19 @@ public class WxCjNoticeServiceImpl implements WxNoticeService {
 
     @Value("${wx.cj.tmplate.id}")
     private String cjTmplateId;
+    @Value("${wx.pdf.report.tmplate.id}")
+    private String pdfReportTemplateId;
+
     @Autowired
     private WxAccessTokenService accessTokenService;
 
     @Override
     public void notice(WxNoticeData data) {
-
         data.setTemplate_id(cjTmplateId);
+        myNotice(data);
+    }
+
+    private void myNotice(WxNoticeData data){
         String accessToken = accessTokenService.fetchAccessToken();
         String url = WxConsts.URL_TEMPLATE_SEND;
         url = url.replaceAll("ACCESS_TOKEN", accessToken);
@@ -48,6 +54,11 @@ public class WxCjNoticeServiceImpl implements WxNoticeService {
         } finally {
             hcUtils.close();
         }
+    }
+    @Override
+    public void notice2(WxNoticeData data) {
+        data.setTemplate_id(pdfReportTemplateId);
+        myNotice(data);
 
     }
 }

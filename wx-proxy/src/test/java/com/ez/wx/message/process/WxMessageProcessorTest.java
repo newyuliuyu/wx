@@ -52,4 +52,22 @@ public class WxMessageProcessorTest {
 
         System.out.println();
     }
+    @Test
+    public void MenuFetchStudentPdfReportEvent() throws Exception {
+        WxMessageHandlerMapping mapping = WxMessageHandlerMapping.initInstance("com.ez.wx.message.processor");
+
+        String xml = "<xml>" +
+                "<ToUserName><![CDATA[toUser]]></ToUserName>" +
+                "<FromUserName><![CDATA[FromUser]]></FromUserName>" +
+                "<CreateTime>123456789</CreateTime>" +
+                "<MsgType><![CDATA[event]]></MsgType>" +
+                "<Event><![CDATA[CLICK]]></Event>" +
+                "<EventKey><![CDATA[EVENTKEY]]></EventKey>" +
+                "</xml>";
+        WxXmlMessage inMsg = XStreamTransformer.fromXml(WxXmlMessage.class, xml);
+
+        String resultXml = WxMessageProcessor.create(inMsg).process().getXml();
+
+        System.out.println();
+    }
 }

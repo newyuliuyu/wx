@@ -26,4 +26,6 @@ public interface WxBoundStudentDao {
     WxBoundStudent getWxBoundStudent(@Param("wxopenid") String wxopenid);
 
     int addStudentInfo(@Param("wxBoundStudent") WxBoundStudent wxBoundStudent);
+
+    boolean isPay(@Param("uukey") String uuky,@Param("code")String code);
 }
